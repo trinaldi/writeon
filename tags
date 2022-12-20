@@ -37,6 +37,7 @@ CommentType	app/graphql/types/comment_type.rb	/^  class CommentType < Types::Bas
 CommentsController	app/controllers/comments_controller.rb	/^class CommentsController < ApplicationController$/;"	c
 CommentsHelper	app/helpers/comments_helper.rb	/^module CommentsHelper$/;"	m
 Connection	app/channels/application_cable/connection.rb	/^  class Connection < ActionCable::Connection::Base$/;"	c	module:ApplicationCable
+CreatePost	app/graphql/mutations/create_post.rb	/^class Mutations::CreatePost < Mutations::BaseMutation$/;"	c	module:Mutations
 GraphqlController	app/controllers/graphql_controller.rb	/^class GraphqlController < ApplicationController$/;"	c
 MutationType	app/graphql/types/mutation_type.rb	/^  class MutationType < Types::BaseObject$/;"	c	module:Types
 Mutations	app/graphql/mutations/base_mutation.rb	/^module Mutations$/;"	m
@@ -84,9 +85,11 @@ index	app/controllers/posts_controller.rb	/^  def index$/;"	f	class:PostsControl
 new	app/controllers/comments_controller.rb	/^  def new$/;"	f	class:CommentsController
 new	app/controllers/posts_controller.rb	/^  def new$/;"	f	class:PostsController
 object_from_id	app/graphql/blog_schema.rb	/^  def self.object_from_id(global_id, query_ctx)$/;"	S	class:BlogSchema
+post	app/graphql/types/query_type.rb	/^    def post(id:)$/;"	f	class:Types.QueryType
 post_params	app/controllers/posts_controller.rb	/^    def post_params$/;"	f	class:PostsController
 posts	app/graphql/types/query_type.rb	/^    def posts$/;"	f	class:Types.QueryType
 prepare_variables	app/controllers/graphql_controller.rb	/^  def prepare_variables(variables_param)$/;"	f	class:GraphqlController
+resolve	app/graphql/mutations/create_post.rb	/^  def resolve(title:, body:)$/;"	f	class:CreatePost
 resolve_type	app/graphql/blog_schema.rb	/^  def self.resolve_type(abstract_type, obj, ctx)$/;"	S	class:BlogSchema
 set_comment	app/controllers/comments_controller.rb	/^    def set_comment$/;"	f	class:CommentsController
 set_post	app/controllers/posts_controller.rb	/^    def set_post$/;"	f	class:PostsController
