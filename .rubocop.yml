@@ -1,0 +1,14 @@
+require:
+  - rubocop-rails
+  - rubocop-graphql
+AllCops:
+  NewCops: enable
+Style/FrozenStringLiteralComment:
+  Enabled: false
+Style/Documentation:
+  Enabled: false
+Rails/WhereExists:
+  Enabled: false
+Metrics/BlockLength:
+  Exclude:
+    - 'spec/**/*'
