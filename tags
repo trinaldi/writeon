@@ -34,7 +34,7 @@ BlogSchema	app/graphql/blog_schema.rb	/^class BlogSchema < GraphQL::Schema$/;"	c
 Channel	app/channels/application_cable/channel.rb	/^  class Channel < ActionCable::Channel::Base$/;"	c	module:ApplicationCable
 Comment	app/models/comment.rb	/^class Comment$/;"	c	mixin:include:Mongoid.Document,include:Mongoid.Timestamps
 Comment type	spec/app/models/comment_spec.rb	/^RSpec.describe Comment, type: :model do$/;"	d
-CommentType	app/graphql/types/comment_type.rb	/^  class CommentType < Types::BaseObject$/;"	c	module:Types
+CommentType	app/graphql/types/comment_type.rb	/^  class CommentType < BaseObject$/;"	c	module:Types
 CommentsController	app/controllers/comments_controller.rb	/^class CommentsController < ApplicationController$/;"	c
 CommentsHelper	app/helpers/comments_helper.rb	/^module CommentsHelper$/;"	m
 Connection	app/channels/application_cable/connection.rb	/^  class Connection < ActionCable::Connection::Base$/;"	c	module:ApplicationCable
@@ -45,7 +45,7 @@ Mutations	app/graphql/mutations/base_mutation.rb	/^module Mutations$/;"	m
 Mutations	app/graphql/mutations/create_post.rb	/^module Mutations$/;"	m
 NodeType	app/graphql/types/node_type.rb	/^  module NodeType$/;"	m	module:Types	mixin:include:Types.BaseInterface,include:GraphQL.Types.Relay.NodeBehaviors
 Post	app/models/post.rb	/^class Post$/;"	c	mixin:include:Mongoid.Document,include:Mongoid.Timestamps
-PostType	app/graphql/types/post_type.rb	/^    class PostType < BaseObject$/;"	c	module:Types.Types
+PostType	app/graphql/types/post_type.rb	/^  class PostType < BaseObject$/;"	c	module:Types
 PostsController	app/controllers/posts_controller.rb	/^class PostsController < ApplicationController$/;"	c
 PostsHelper	app/helpers/posts_helper.rb	/^module PostsHelper$/;"	m
 QueryType	app/graphql/types/query_type.rb	/^  class QueryType < Types::BaseObject$/;"	c	module:Types	mixin:include:GraphQL.Types.Relay.HasNodeField,include:GraphQL.Types.Relay.HasNodesField
@@ -67,7 +67,6 @@ Types	app/graphql/types/base_union.rb	/^module Types$/;"	m
 Types	app/graphql/types/comment_type.rb	/^module Types$/;"	m
 Types	app/graphql/types/mutation_type.rb	/^module Types$/;"	m
 Types	app/graphql/types/node_type.rb	/^module Types$/;"	m
-Types	app/graphql/types/post_type.rb	/^  module Types$/;"	m	module:Types
 Types	app/graphql/types/post_type.rb	/^module Types$/;"	m
 Types	app/graphql/types/query_type.rb	/^module Types$/;"	m
 We're sorry, but something went wrong (500)	public/500.html	/^  <title>We're sorry, but something went wrong (500)<\/title>$/;"	j
