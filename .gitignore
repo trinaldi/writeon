@@ -25,10 +25,12 @@
 /config/master.key
 
 # VIM tags
-./tags
+tags
+tags*
 
 # byebug
 .byebug_history
 
 # RSpec
 .rspec
+
