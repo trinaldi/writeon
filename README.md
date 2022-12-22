@@ -1,24 +1,30 @@
-# README
+# WriteOn
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+WriteOn is a daily activities manager, AKA a diary.
+This repository contains the Backend code. Ruby on Rails GraphQL API using
+MongoDB as the DB. Frontend code has its own repository.
 
-Things you may want to cover:
+## Installing
 
-* Ruby version
+```sh
+Ruby 3.0.4
+Rails 7.0.4
+MongoDB 6.0.3
+```
 
-* System dependencies
+are the requisites. Having said that, use `bundler` to install the dependencies:
 
-* Configuration
+`$ bundle install`
 
-* Database creation
+then open the server:
 
-* Database initialization
+`$ bin/rails server -p 5000`
 
-* How to run the test suite
+`-p 5000` will default to port 5000.
 
-* Services (job queues, cache servers, search engines, etc.)
 
-* Deployment instructions
+## Contributing
 
-* ...
+Follow the rules on `.rubocop.yml` and make sure to test _everything_ before
+opening a Pull Request
+
