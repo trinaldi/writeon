@@ -5,7 +5,7 @@ class Comment
   field :name, type: String
   field :message, type: String
 
-  belongs_to :post
+  embedded_in :post
 
   validates :name, :message, presence: true
 end

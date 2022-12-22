@@ -6,5 +6,5 @@ RSpec.describe Post, type: :model do
   it { is_expected.to have_field(:body).of_type(String) }
   it { is_expected.to validate_presence_of(:title) }
   it { is_expected.to validate_presence_of(:body) }
-  it { is_expected.to have_many(:comment).with_dependent(:destroy) }
+  it { is_expected.to embed_many(:comment) }
 end

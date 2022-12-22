@@ -5,9 +5,7 @@ class Post
   field :title, type: String
   field :body, type: String
 
-  embeds_many :comment
-
   validates :title, :body, presence: true
 
-  embeds_many :comment, dependent: :destroy
+  embeds_many :comment
 end
