@@ -55,6 +55,8 @@ The change you wanted was rejected (422)	public/422.html	/^  <title>The change y
 The change you wanted was rejected.	public/422.html	/^      <h1>The change you wanted was rejected.<\/h1>$/;"	h
 The page you were looking for doesn't exist (404)	public/404.html	/^  <title>The page you were looking for doesn't exist (404)<\/title>$/;"	j
 The page you were looking for doesn't exist.	public/404.html	/^      <h1>The page you were looking for doesn't exist.<\/h1>$/;"	h
+Todo	app/models/todo.rb	/^class Todo$/;"	c	mixin:include:Mongoid.Document,include:Mongoid.Timestamps
+Todo type	spec/app/models/todo_spec.rb	/^RSpec.describe Todo, type: :model do$/;"	d
 Types	app/graphql/types/base_argument.rb	/^module Types$/;"	m
 Types	app/graphql/types/base_connection.rb	/^module Types$/;"	m
 Types	app/graphql/types/base_edge.rb	/^module Types$/;"	m
@@ -101,5 +103,3 @@ show	app/controllers/posts_controller.rb	/^  def show; end$/;"	f	class:PostsCont
 system!	bin/setup	/^def system!(*args)$/;"	f
 update	app/controllers/comments_controller.rb	/^  def update$/;"	f	class:CommentsController
 update	app/controllers/posts_controller.rb	/^  def update$/;"	f	class:PostsController
-when new post is created	spec/app/models/post_spec.rb	/^  context 'when new post is created' do$/;"	c	describe:Post type
-will increase Comment count	spec/app/models/post_spec.rb	/^    it 'will increase Comment count' do$/;"	i	context:Post type.when new post is created

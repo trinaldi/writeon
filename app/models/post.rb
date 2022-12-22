@@ -9,5 +9,5 @@ class Post
 
   validates :title, :body, presence: true
 
-  has_many :comments, dependent: :destroy
+  embeds_many :comment, dependent: :destroy
 end
