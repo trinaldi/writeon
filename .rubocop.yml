@@ -7,6 +7,12 @@ Style/FrozenStringLiteralComment:
   Enabled: false
 Style/Documentation:
   Enabled: false
+GraphQL/ObjectDescription:
+  Enabled: false
+GraphQL/FieldDescription:
+  Enabled: false
+GraphQL/ArgumentDescription:
+  Enabled: false
 Rails/WhereExists:
   Enabled: false
 Metrics/BlockLength:

@@ -7,5 +7,5 @@ class Comment
 
   embedded_in :post
 
-  validates :name, :message, presence: true
+  validates :message, presence: true
 end
