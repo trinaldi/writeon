@@ -16,12 +16,7 @@ are the requisites. Having said that, use `bundler` to install the dependencies:
 
 `$ bundle install`
 
-then open the server:
-
-`$ bin/rails server -p 5000`
-
-`-p 5000` will default to port 5000.
-
+then open the server, which will default to port `5000
 
 ## Contributing
 
