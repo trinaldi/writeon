@@ -8,4 +8,5 @@ class Post
   validates :title, :body, presence: true
 
   embeds_many :comment
+  embeds_many :todo
 end

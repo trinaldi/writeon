@@ -6,4 +6,6 @@ class Todo
   field :task, type: String
 
   validates :done, :task, presence: true
+
+  embedded_in :post
 end
