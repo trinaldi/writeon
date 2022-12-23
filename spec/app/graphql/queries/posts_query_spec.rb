@@ -17,6 +17,11 @@ describe 'Posts Query', type: :request do
           name
           message
         }
+        todo {
+          id
+          done
+          task
+        }
       }
     }
       GRAPHQL
@@ -33,6 +38,13 @@ describe 'Posts Query', type: :request do
               'id' => c.id.to_s,
               'name' => c.name,
               'message' => c.message
+            }
+          end,
+          'todo' => posts.todo.map do |t|
+            {
+              'id' => t.id.to_s,
+              'done' => t.done,
+              'task' => t.task
             }
           end
         }]
