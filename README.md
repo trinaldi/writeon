@@ -16,7 +16,7 @@ are the requisites. Having said that, use `bundler` to install the dependencies:
 
 `$ bundle install`
 
-then open the server, which will default to port `5000
+then open the server, which will default to port `5000`
 
 ## Contributing
 
