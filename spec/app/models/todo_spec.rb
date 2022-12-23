@@ -5,4 +5,5 @@ RSpec.describe Todo, type: :model do
   it { is_expected.to have_field(:task).of_type(String) }
   it { is_expected.to validate_presence_of(:done) }
   it { is_expected.to validate_presence_of(:task) }
+  it { is_expected.to be_embedded_in(:post) }
 end
