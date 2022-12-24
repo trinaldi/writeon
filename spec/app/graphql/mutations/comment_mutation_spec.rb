@@ -4,7 +4,7 @@ describe 'Comment[s] Mutation', type: :request do
   include_context 'GraphQL Client'
 
   context 'when a new comment is present' do
-    let(:new_post) { create(:post, comment: nil) }
+    let(:new_post) { create(:post) }
     let(:new_comment) { build(:comment) }
     let(:new_comment_response) { graph_response[:data] }
     let(:query) do
@@ -35,11 +35,11 @@ describe 'Comment[s] Mutation', type: :request do
     end
 
     it 'will save it' do
-      expect(new_post.comment.count).to eq(1)
+      expect(new_post.comment.count).to eq(2)
     end
 
     it 'will have the correct data' do
-      expect(new_comment_response['addComment']['post']['comment'][0]).to include(
+      expect(new_comment_response['addComment']['post']['comment'][1]).to include(
         'message' => new_comment.message
       )
     end

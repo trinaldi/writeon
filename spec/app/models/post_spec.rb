@@ -8,4 +8,6 @@ RSpec.describe Post, type: :model do
   it { is_expected.to validate_presence_of(:body) }
   it { is_expected.to embed_many(:comment) }
   it { is_expected.to embed_many(:todo) }
+  it { is_expected.to validate_presence_of(:comment) }
+  it { is_expected.to validate_presence_of(:todo) }
 end
