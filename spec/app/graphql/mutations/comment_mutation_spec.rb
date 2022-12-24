@@ -20,6 +20,9 @@ describe 'Comment[s] Mutation', type: :request do
               id
               message
             }
+            todo {
+              id
+            }
           }
         }
       }

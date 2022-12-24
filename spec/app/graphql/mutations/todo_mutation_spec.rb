@@ -21,6 +21,7 @@ describe 'Todo[s] Mutation', type: :request do
               message
             }
             todo {
+              id
               done
               task
             }

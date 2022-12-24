@@ -10,13 +10,13 @@ describe 'Update to do mutation', type: :request do
       <<-GRAPHQL
       mutation UpdateTodo($done: Boolean!, $postId: String!, $todoId: String!){
         updateTodo(input: { done: $done , postId: $postId, todoId: $todoId  }) {
-            clientMutationId
                 errors
                 post {
                   id
                   title
                   body
                   comment {
+                    id
                     name
                     message
                   }
