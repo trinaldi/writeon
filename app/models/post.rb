@@ -8,6 +8,5 @@ class Post
   embeds_many :comment
   embeds_many :todo
 
-  validates :comment, :todo, presence: true
   validates :title, :body, presence: true
 end
