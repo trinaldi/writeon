@@ -9,11 +9,11 @@ module Mutations
 
     def resolve(post_id:, message:, name: 'Tiago')
       @post = Post.find(post_id)
-      @comment = Comment.new(name: name, message: message, post: @post)
+      @comment = Comment.new(name: name, message: message)
 
-      if @comment.valid? && @post.save
+      if @comment.valid?
         @post.comment << @comment
-        @post.save!
+
         { post: @post, errors: [] }
       else
         { post: nil, errors: post.errors.full_messages }

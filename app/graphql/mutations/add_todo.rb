@@ -11,9 +11,9 @@ module Mutations
       @post = Post.find(post_id)
       @todo = Todo.new(done: done, task: task)
 
-      if @todo.valid? && @post.save
-        @post.todo << todo
-        @post.save!
+      if @todo.valid?
+        @post.todo << @todo
+
         { post: @post, errors: [] }
       else
         { post: nil, errors: post.errors.full_messages }

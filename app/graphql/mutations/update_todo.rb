@@ -13,6 +13,7 @@ module Mutations
 
       if @todo.valid?
         @todo.update!(done: done)
+
         { post: @post, errors: [] }
       else
         { post: nil, errors: post.errors.full_messages }
