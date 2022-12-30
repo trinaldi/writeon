@@ -15,7 +15,7 @@ gem 'rails', '~> 7.0.4'
 gem 'simple_enum', require: 'simple_enum/mongoid'
 gem 'stimulus-rails'
 gem 'turbo-rails'
-gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
+gem 'tzinfo-data'
 
 group :test do
   gem 'database_cleaner-mongoid'
