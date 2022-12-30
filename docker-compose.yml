@@ -1,0 +1,29 @@
+version: "3"
+
+services:
+  mongo:
+    image: 'mongo'
+    networks:
+      - app
+    volumes:
+      - "db:/data/db"
+    ports:
+      - "27017:27017"
+
+  app:
+    build: .
+    networks:
+      - app
+    volumes:
+      - ./:/app
+    depends_on:
+      - mongo
+    ports:
+      - "5000:5000"
+
+
+networks:
+  app:
+
+volumes:
+  db:
