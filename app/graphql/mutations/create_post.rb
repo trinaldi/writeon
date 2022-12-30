@@ -7,10 +7,10 @@ module Mutations
     field :post, Types::PostType, null: false
 
     def resolve(title:, body:)
-      post = Post.create(title: title, body: body)
+      @post = Post.create(title: title, body: body)
 
-      if post.save
-        { post: post, errors: [] }
+      if @post.save
+        { post: @post, errors: [] }
       else
         { post: nil, errors: post.errors.full_messages }
       end

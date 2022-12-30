@@ -9,10 +9,10 @@ module Mutations
 
     def resolve(post_id:, task:, done:)
       @post = Post.find(post_id)
-      todo = Todo.new(done: done, task: task)
-      @post.todo << todo
+      @todo = Todo.new(done: done, task: task)
 
-      if todo.valid? && @post.save
+      if @todo.valid? && @post.save
+        @post.todo << todo
         @post.save!
         { post: @post, errors: [] }
       else
