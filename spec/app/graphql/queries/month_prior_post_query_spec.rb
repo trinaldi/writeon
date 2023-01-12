@@ -5,7 +5,6 @@ describe 'Posts Query', type: :request do
 
   context 'when calling posts query' do
     let!(:old_post) { create(:post) }
-    let!(:latest_post) { create(:post) }
     let(:query) do
       <<-'GRAPHQL'
     {

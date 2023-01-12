@@ -1,6 +1,8 @@
 require:
-  - rubocop-rails
   - rubocop-graphql
+  - rubocop-performance
+  - rubocop-rails
+  - rubocop-rspec
 AllCops:
   NewCops: enable
 Style/FrozenStringLiteralComment:
