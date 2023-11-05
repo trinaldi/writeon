@@ -8,7 +8,7 @@ describe 'Mood Mutation', type: :request do
     let(:new_mood) { build(:mood) }
     let(:new_mood_response) { graph_response[:data] }
     let(:query) do
-      <<-'GRAPHQL'
+      <<-GRAPHQL
       mutation AddMood( $mood: String!, $postId: String! ) {
         addMood(input: { mood: $mood, postId: $postId}) {
           clientMutationId

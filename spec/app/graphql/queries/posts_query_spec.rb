@@ -6,7 +6,7 @@ describe 'Posts Query', type: :request do
   context 'when calling posts query' do
     let!(:posts) { create(:post) }
     let(:query) do
-      <<-'GRAPHQL'
+      <<-GRAPHQL
     {
       posts {
         id

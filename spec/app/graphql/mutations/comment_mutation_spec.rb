@@ -8,7 +8,7 @@ describe 'Comment[s] Mutation', type: :request do
     let(:new_comment) { build(:comment) }
     let(:new_comment_response) { graph_response[:data] }
     let(:query) do
-      <<-'GRAPHQL'
+      <<-GRAPHQL
       mutation AddComent($message: String!, $postId: String!) {
         addComment(input: { message: $message, postId: $postId  }) {
           errors
