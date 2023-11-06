@@ -1,6 +1,5 @@
 module Types
   class MutationType < Types::BaseObject
-    # rubocop:disable GraphQL/ExtractType
     field :add_comment, mutation: Mutations::AddComment
     field :add_mood, mutation: Mutations::AddMood
     field :add_todo, mutation: Mutations::AddTodo

@@ -18,7 +18,9 @@ GraphQL/ArgumentDescription:
 Rails/WhereExists:
   Enabled: false
 GraphQL/ExtractType:
-    Enabled: false
+  Enabled: false
+GraphQL/ExtractInputType:
+  Enabled: false
 Metrics/BlockLength:
   Exclude:
     - 'spec/**/*'
