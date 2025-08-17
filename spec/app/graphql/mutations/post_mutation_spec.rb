@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'Create Post mutation', type: :request do
+describe 'Add Post mutation', type: :request do
   include_context 'GraphQL Client'
 
   context 'when a new post is present' do
@@ -8,8 +8,8 @@ describe 'Create Post mutation', type: :request do
     let(:new_post_response) { graph_response[:data] }
     let(:query) do
       <<-GRAPHQL
-      mutation CreatePost($title: String!, $body: String!) {
-        createPost(input: { title: $title, body: $body }) {
+      mutation AddPost($title: String!, $body: String!) {
+        addPost(input: { title: $title, body: $body }) {
           errors
           post {
             body
@@ -28,15 +28,15 @@ describe 'Create Post mutation', type: :request do
                  })
     end
 
-    it 'will create a post' do
+    it 'creates a post' do
       expect(Post.count).to eq(1)
     end
 
-    it 'will have the correct data' do
-      expect(new_post_response['createPost']['post']).to include({
-                                                                   'title' => my_post.title,
-                                                                   'body' => my_post.body
-                                                                 })
+    it 'has the correct data' do
+      expect(new_post_response['addPost']['post']).to include({
+                                                                'title' => my_post.title,
+                                                                'body' => my_post.body
+                                                              })
     end
   end
 end

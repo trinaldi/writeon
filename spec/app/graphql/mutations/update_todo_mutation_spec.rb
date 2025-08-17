@@ -40,7 +40,7 @@ describe 'Update to do mutation', type: :request do
       my_post.reload
     end
 
-    it 'will correctly update it' do
+    it 'correctlies update it' do
       expect(my_post.todo.first.done).to be(true)
     end
   end

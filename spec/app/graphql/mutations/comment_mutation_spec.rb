@@ -34,11 +34,11 @@ describe 'Comment[s] Mutation', type: :request do
       new_post.reload
     end
 
-    it 'will save it' do
+    it 'saves it' do
       expect(new_post.comment.count).to eq(2)
     end
 
-    it 'will have the correct data' do
+    it 'has the correct data' do
       expect(new_comment_response['addComment']['post']['comment'][1]).to include(
         'message' => new_comment.message
       )

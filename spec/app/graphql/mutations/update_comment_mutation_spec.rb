@@ -40,7 +40,7 @@ describe 'Update comment mutation', type: :request do
       post_with_comment.reload
     end
 
-    it 'will replace the post comment with new message' do
+    it 'replaces the post comment with new message' do
       expect(post_with_comment.comment.first.message).to eq(comment_to_change.message)
     end
   end

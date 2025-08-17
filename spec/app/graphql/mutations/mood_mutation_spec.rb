@@ -42,11 +42,11 @@ describe 'Mood Mutation', type: :request do
       my_post.reload
     end
 
-    it 'will save it' do
+    it 'saves it' do
       expect(my_post.mood).to be_truthy
     end
 
-    it 'will have the correct data' do
+    it 'has the correct data' do
       expect(new_mood_response['addMood']['post']['mood']).to include(
         'mood' => new_mood.mood.to_s
       )
