@@ -2,14 +2,15 @@
 
 WriteOn is a daily activities manager, AKA a diary.
 This repository contains the Backend code. Ruby on Rails GraphQL API using
-MongoDB as the DB. Frontend code has its own repository.
+MongoDB as the DB. 
+Frontend code has its own repository, [WriteOn-Web](https://github.com/trinaldi/writeon-web). 
 
 ## Installing
 
 ```sh
-Ruby 3.0.4
-Rails 7.0.4
-MongoDB 6.0.3
+Ruby 3.3.0
+Rails 7.1.5.2
+MongoDB 8.0.12
 ```
 
 are the requisites. Having said that, use `bundler` to install the dependencies:
