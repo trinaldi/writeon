@@ -3,7 +3,7 @@ RSpec.configure do |config|
     DatabaseCleaner[:mongoid].clean
   end
 
-  config.around(:each) do |example|
+  config.around do |example|
     DatabaseCleaner.cleaning do
       example.run
     end

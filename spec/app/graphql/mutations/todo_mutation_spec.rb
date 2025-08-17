@@ -40,11 +40,11 @@ describe 'Todo[s] Mutation', type: :request do
       my_post.reload
     end
 
-    it 'will save it' do
+    it 'saves it' do
       expect(my_post.todo.count).to eq(2)
     end
 
-    it 'will have the correct data' do
+    it 'has the correct data' do
       expect(new_todo_response['addTodo']['post']['todo'][1]).to include(
         'done' => new_todo.done,
         'task' => new_todo.task

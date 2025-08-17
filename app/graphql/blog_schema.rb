@@ -1,7 +1,9 @@
+# rubocop: disable GraphQL/MaxComplexitySchema
 class BlogSchema < GraphQL::Schema
   mutation(Types::MutationType)
   query(Types::QueryType)
 
+  max_depth 10
   # For batch-loading (see https://graphql-ruby.org/dataloader/overview.html)
   use GraphQL::Dataloader
 
@@ -31,3 +33,4 @@ class BlogSchema < GraphQL::Schema
     GlobalID.find(global_id)
   end
 end
+# rubocop: enable GraphQL/MaxComplexitySchema
