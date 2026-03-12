@@ -1,4 +1,4 @@
-RSpec.shared_context 'with GraphQL Client', shared_context: :metadata do
+RSpec.shared_context 'GraphQL Client', shared_context: :metadata do
   def post_graph(query, variables = {})
     post '/graphql', params: { query: query, variables: variables }, as: :json
   end

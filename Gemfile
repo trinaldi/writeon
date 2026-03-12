@@ -7,7 +7,7 @@ ruby '3.3.0'
 
 gem 'bootsnap', require: false
 gem 'graphiql-rails'
-gem 'graphql', '~> 2.0'
+gem 'graphql'
 gem 'mongoid'
 gem 'mongoid-slug'
 gem 'puma', '>=6'
