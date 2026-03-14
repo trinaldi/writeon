@@ -9,7 +9,7 @@ module Mutations
 
     def resolve(todo_id:, done:, post_id:)
       @post = Post.find(post_id)
-      @todo = @post.todo.find(todo_id)
+      @todo = @post.todos.find(todo_id)
 
       if @todo.valid?
         @todo.update!(done: done)

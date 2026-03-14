@@ -9,7 +9,7 @@ module Mutations
 
     def resolve(comment_id:, post_id:, message:)
       @post = Post.find(post_id)
-      @comment = @post.comment.find(comment_id)
+      @comment = @post.comments.find(comment_id)
 
       if @comment.valid?
         @comment.update!(message: message)

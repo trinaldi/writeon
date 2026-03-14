@@ -15,7 +15,7 @@ describe 'Mood Mutation', type: :request do
           errors
           post {
             body
-            comment {
+            comments {
               id
               message
               name
@@ -26,7 +26,7 @@ describe 'Mood Mutation', type: :request do
               mood
             }
             title
-            todo {
+            todos {
               done
               id
               task
