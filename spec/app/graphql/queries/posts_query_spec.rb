@@ -12,12 +12,12 @@ describe 'Posts Query', type: :request do
         id
         title
         body
-        comment {
+        comments {
           id
           name
           message
         }
-        todo {
+        todos {
           id
           done
           task
@@ -33,14 +33,14 @@ describe 'Posts Query', type: :request do
           'id' => posts.id.to_s,
           'title' => posts.title,
           'body' => posts.body,
-          'comment' => posts.comment.map do |c|
+          'comments' => posts.comments.map do |c|
             {
               'id' => c.id.to_s,
               'name' => c.name,
               'message' => c.message
             }
           end,
-          'todo' => posts.todo.map do |t|
+          'todos' => posts.todos.map do |t|
             {
               'id' => t.id.to_s,
               'done' => t.done,

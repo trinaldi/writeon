@@ -16,11 +16,11 @@ describe 'Todo[s] Mutation', type: :request do
             body
             id
             title
-            comment {
+            comments {
               id
               message
             }
-            todo {
+            todos {
               id
               done
               task
@@ -41,11 +41,11 @@ describe 'Todo[s] Mutation', type: :request do
     end
 
     it 'saves it' do
-      expect(my_post.todo.count).to eq(2)
+      expect(my_post.todos.count).to eq(2)
     end
 
     it 'has the correct data' do
-      expect(new_todo_response['addTodo']['post']['todo'][1]).to include(
+      expect(new_todo_response['addTodo']['post']['todos'][1]).to include(
         'done' => new_todo.done,
         'task' => new_todo.task
       )

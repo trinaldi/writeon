@@ -15,12 +15,12 @@ describe 'Posts Query', type: :request do
         mood {
           mood
         }
-        comment {
+        comments {
           id
           name
           message
         }
-        todo {
+        todos {
           id
           done
           task

@@ -5,7 +5,7 @@ describe 'Update to do mutation', type: :request do
 
   context 'when to do is updated' do
     let(:my_todo) { build(:todo, done: false) }
-    let(:my_post) { create(:post, todo: [my_todo]) }
+    let(:my_post) { create(:post, todos: [my_todo]) }
     let(:query) do
       <<-GRAPHQL
       mutation UpdateTodo($done: Boolean!, $postId: String!, $todoId: String!){
@@ -15,12 +15,12 @@ describe 'Update to do mutation', type: :request do
                   id
                   title
                   body
-                  comment {
+                  comments {
                     id
                     name
                     message
                   }
-                  todo {
+                  todos {
                     id
                     done
                     task
@@ -34,14 +34,14 @@ describe 'Update to do mutation', type: :request do
     before do
       post_graph(query, {
                    postId: my_post.id.to_s,
-                   todoId: my_post.todo.first.id.to_s,
+                   todoId: my_post.todos.first.id.to_s,
                    done: true
                  })
       my_post.reload
     end
 
     it 'correctlies update it' do
-      expect(my_post.todo.first.done).to be(true)
+      expect(my_post.todos.first.done).to be(true)
     end
   end
 end

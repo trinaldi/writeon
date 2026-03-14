@@ -5,7 +5,7 @@ describe 'Update comment mutation', type: :request do
 
   context 'when a comment is updated' do
     let(:comment_to_change) { build(:comment, message: 'me me me me') }
-    let(:post_with_comment) { create(:post, comment: [comment_to_change]) }
+    let(:post_with_comment) { create(:post, comments: [comment_to_change]) }
     let(:changed_post_response) { graph_response[:data] }
     let(:query) do
       <<-GRAPHQL
@@ -16,11 +16,11 @@ describe 'Update comment mutation', type: :request do
             body
             id
             title
-            comment {
+            comments {
               id
               message
             }
-            todo {
+            todos {
               id
               done
               task
@@ -41,7 +41,7 @@ describe 'Update comment mutation', type: :request do
     end
 
     it 'replaces the post comment with new message' do
-      expect(post_with_comment.comment.first.message).to eq(comment_to_change.message)
+      expect(post_with_comment.comments.first.message).to eq(comment_to_change.message)
     end
   end
 end

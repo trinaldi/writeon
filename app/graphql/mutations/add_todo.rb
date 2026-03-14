@@ -12,7 +12,7 @@ module Mutations
       @todo = Todo.new(done: done, task: task)
 
       if @todo.valid?
-        @post.todo << @todo
+        @post.todos << @todo
 
         { post: @post, errors: [] }
       else

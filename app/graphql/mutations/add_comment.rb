@@ -12,7 +12,7 @@ module Mutations
       @comment = Comment.new(name: name, message: message)
 
       if @comment.valid?
-        @post.comment << @comment
+        @post.comments << @comment
 
         { post: @post, errors: [] }
       else

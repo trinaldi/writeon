@@ -5,8 +5,8 @@ class Post
   field :title, type: String
   field :body, type: String
 
-  embeds_many :comment
-  embeds_many :todo
+  embeds_many :comments
+  embeds_many :todos
   embeds_one :mood
 
   validates :title, :body, presence: true

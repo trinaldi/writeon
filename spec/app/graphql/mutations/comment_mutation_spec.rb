@@ -16,11 +16,11 @@ describe 'Comment[s] Mutation', type: :request do
             body
             id
             title
-            comment {
+            comments {
               id
               message
             }
-            todo {
+            todos {
               id
             }
           }
@@ -35,11 +35,11 @@ describe 'Comment[s] Mutation', type: :request do
     end
 
     it 'saves it' do
-      expect(new_post.comment.count).to eq(2)
+      expect(new_post.comments.count).to eq(2)
     end
 
     it 'has the correct data' do
-      expect(new_comment_response['addComment']['post']['comment'][1]).to include(
+      expect(new_comment_response['addComment']['post']['comments'][1]).to include(
         'message' => new_comment.message
       )
     end
