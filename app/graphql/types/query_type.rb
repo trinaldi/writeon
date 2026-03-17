@@ -4,11 +4,13 @@ module Types
     include GraphQL::Types::Relay::HasNodesField
 
     field :month_prior_posts, [Types::PostType], null: false,
-                                                 description: 'Posts from a month ago'
+      description: 'Posts from a month ago'
     field :posts, [Types::PostType], null: false, description: 'All posts'
 
     def posts
-      Post.all
+      Rails.cache.fetch('all_posts', expires_in: 5.minutes) do
+        Post.all.to_a
+      end
     end
 
     def month_prior_posts
