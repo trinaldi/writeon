@@ -4,10 +4,7 @@ RSpec.shared_context 'GraphQL Client', shared_context: :metadata do
   end
 
   def graph_response
-    body = @response.body # rubocop:disable RSpec/InstanceVariable
-    parsed_response = JSON.parse(body, { symbolize_names: true }).with_indifferent_access
-    return parsed_response unless parsed_response[:errors]
-
-    raise parsed_response[:errors].pluck('message').join
+    body = @response.body
+    JSON.parse(body, { symbolize_names: true }).with_indifferent_access
   end
 end

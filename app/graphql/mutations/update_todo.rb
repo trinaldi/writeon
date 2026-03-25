@@ -1,22 +1,22 @@
 module Mutations
   class UpdateTodo < Mutations::BaseMutation
+    argument :day_id, String, required: true
     argument :done, Boolean, required: true
-    argument :post_id, String, required: true
     argument :todo_id, String, required: true
 
     field :errors, [String], null: false
-    field :post, Types::PostType, null: false
+    field :day, Types::DayType, null: false
 
-    def resolve(todo_id:, done:, post_id:)
-      @post = Post.find(post_id)
-      @todo = @post.todos.find(todo_id)
+    def resolve(todo_id:, done:, day_id:)
+      @day = Post.find(day_id)
+      @todo = @day.todos.find(todo_id)
 
       if @todo.valid?
         @todo.update!(done: done)
 
-        { post: @post, errors: [] }
+        { day: @day, errors: [] }
       else
-        { post: nil, errors: post.errors.full_messages }
+        { day: nil, errors: day.errors.full_messages }
       end
     end
   end
