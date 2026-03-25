@@ -11,7 +11,7 @@ RSpec.describe Mood, type: :model do
   end
 
   it 'accepts all valid moods' do
-    day = Day.create(date: Time.zone.today)
+    day = create(:day, date: Time.zone.today)
 
     %i[very_bad bad neutral good very_good].each do |value|
       mood = day.create_mood(attributes_for(:mood, mood: value))

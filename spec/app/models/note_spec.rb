@@ -9,10 +9,10 @@ describe Note, type: :model do
 
   it 'sets happened_at to current time if not provided' do
     freeze_time do
-      day = Day.create!(date: Time.zone.today)
-      journal = day.create_journal(content: 'start')
+      day = create(:day, date: Time.zone.today)
+      journal = day.create_journal(attributes_for(:journal))
 
-      note = journal.notes.create!(content: 'test')
+      note = journal.notes.create!(attributes_for(:note).except(:happened_at))
 
       expect(note.happened_at).to eq(Time.zone.now)
     end

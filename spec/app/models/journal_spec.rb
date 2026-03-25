@@ -8,8 +8,7 @@ describe Journal, type: :model do
   it { is_expected.to be_embedded_in(:day) }
 
   it 'is invalid without content' do
-    journal = Journal.new(content: nil)
-
+    journal = build(:journal, content: nil)
     expect(journal).not_to be_valid
   end
 end

@@ -9,11 +9,13 @@ describe Day, type: :model do
   it { is_expected.to validate_presence_of(:date) }
   it { is_expected.to validate_uniqueness_of(:date) }
 
-  it "won't allow dupicate date" do
+  it "won't allow duplicate date" do
     today = Time.zone.today
 
-    Day.create!(date: today)
-    expect { Day.create!(date: today) }
-      .to raise_error(Mongoid::Errors::Validations, /Date has already been taken/)
+    create(:day, date: today)
+
+    expect do
+      create(:day, date: today)
+    end.to raise_error(Mongoid::Errors::Validations, /Date has already been taken/)
   end
 end

@@ -15,30 +15,29 @@ RSpec.describe Movie, type: :model do
 
   it 'sets watched_at to day date if not provided' do
     freeze_time do
-      day = Day.create!(date: Date.new(2026, 3, 25))
+      date = Date.new(2026, 3, 25)
+      day = create(:day, date: date)
 
-      movie = day.movies.create!(title: 'Test', year: 2026, rating: 5)
+      movie = day.movies.create!(title: 'Test', year: date.year, rating: 5)
 
-      expect(movie.watched_at.to_date).to eq(day.date)
+      expect(movie.watched_at.to_date).to eq(date)
     end
   end
 
   it 'overrides watched_at if provided' do
-    day = Day.create!(date: Date.new(2026, 3, 25))
+    date = Date.new(2026, 3, 25)
+    day = create(:day, date: date)
     custom_date = DateTime.new(2020, 1, 1)
 
     movie = day.movies.create!(
-      title: 'Test',
-      year: 2026,
-      rating: 5,
-      watched_at: custom_date
+      attributes_for(:movie, watched_at: custom_date, year: date.year)
     )
 
     expect(movie.watched_at).to eq(custom_date)
   end
 
   it 'allows rating between 1 and 5' do
-    day = Day.create!(date: Time.zone.today)
+    day = create(:day)
 
     (1..5).each do |value|
       movie = day.movies.build(title: 'Test', year: 2024, rating: value)
@@ -47,9 +46,11 @@ RSpec.describe Movie, type: :model do
   end
 
   it 'does not allow rating outside 1..5' do
-    day = Day.create!(date: Time.zone.today)
+    day = create(:day)
 
-    movie = day.movies.build(title: 'Test', year: 2024, rating: 6)
+    movie = day.movies.build(
+      attributes_for(:movie, rating: 6)
+    )
 
     expect(movie).not_to be_valid
     expect(movie.errors[:rating]).to be_present
