@@ -5,6 +5,7 @@ class Day
   field :date, type: Date
 
   embeds_many :todos
+  embeds_many :movies
   embeds_one :mood
   embeds_one :journal
 
