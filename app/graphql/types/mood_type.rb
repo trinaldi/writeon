@@ -1,7 +1,11 @@
 module Types
   class MoodType < BaseObject
-    description 'Mood'
-    field :id, ID, null: false, description: 'Mood ID'
-    field :mood, String, null: false, description: 'Current Mood'
+    description 'Mood recorded for a day'
+
+    field :id, GraphQL::Types::ID, null: false,
+                                   description: 'Unique identifier for the mood entry'
+
+    field :mood, MoodEnum, null: false,
+                           description: 'Mood level for the day'
   end
 end
