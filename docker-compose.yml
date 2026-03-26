@@ -1,16 +1,14 @@
-version: "3"
-
 services:
   mongo:
-    image: 'mongo'
+    image: mongo:6.0
     networks:
       - app
     volumes:
-      - "db:/data/db"
+      - db:/data/db
     ports:
       - "27017:27017"
 
-  app:
+  web:
     build: .
     networks:
       - app
@@ -20,7 +18,9 @@ services:
       - mongo
     ports:
       - "5000:5000"
-
+    env_file:
+      - .env.docker
+    command: bundle exec rails server -b 0.0.0.0 -p 5000
 
 networks:
   app:

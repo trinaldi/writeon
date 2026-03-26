@@ -1,16 +1,19 @@
 FROM ruby:3.3.0-alpine
 
-ENV BUNDLER_VERSION=2.7.1
+RUN apk add --no-cache \
+  build-base \
+  git \
+  tzdata \
+  nodejs \
+  yarn
 
-# Generic rails app
-RUN apk update && apk add build-base tzdata
-
-RUN gem install bundler -v 2.7.1
 WORKDIR /app
-ADD Gemfile .
-ADD Gemfile.lock .
+
+COPY Gemfile Gemfile.lock ./
+RUN bundle install
+
 COPY . .
-CMD [ "mv", ".env.docker", ".env"]
-RUN bundle check || bundle install
-RUN gem install foreman
-CMD [ "foreman", "start", "-f", "Procfile" ]
+
+EXPOSE 5000
+
+CMD ["foreman", "start", "-f", "Procfile"]
