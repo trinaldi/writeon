@@ -7,5 +7,5 @@ class Todo
 
   validates :done, :task, presence: true
 
-  embedded_in :post
+  embedded_in :day
 end

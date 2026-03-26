@@ -11,6 +11,7 @@ gem 'graphql'
 gem 'mongoid'
 gem 'mongoid-slug'
 gem 'puma', '>=6'
+gem 'rack-attack'
 gem 'rails', '7.1.5.2'
 gem 'simple_enum', require: 'simple_enum/mongoid'
 gem 'stimulus-rails'
@@ -30,10 +31,12 @@ group :development, :test do
   gem 'faker'
   gem 'rspec-rails'
   gem 'rubocop', require: false
+  gem 'rubocop-factory_bot'
   gem 'rubocop-graphql', require: false
   gem 'rubocop-performance'
   gem 'rubocop-rails', require: false
   gem 'rubocop-rspec'
+  gem 'rubocop-rspec_rails'
 end
 
 group :development do

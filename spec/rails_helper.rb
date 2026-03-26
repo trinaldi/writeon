@@ -27,7 +27,10 @@ Rails.root.glob('spec/support/**/*.rb').each { |f| require f }
 RSpec.configure do |config|
   # Remove this line to enable support for ActiveRecord
   config.use_active_record = false
-
+  config.before(:each, type: :request) do
+    Rack::Attack.enabled = true
+    Rack::Attack.reset!
+  end
   # If you enable ActiveRecord support you should unncomment these lines,
   # note if you'd prefer not to run each example within a transaction, you
   # should set use_transactional_fixtures to false.
@@ -55,4 +58,5 @@ RSpec.configure do |config|
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
   config.include Mongoid::Matchers, type: :model
+  config.include ActiveSupport::Testing::TimeHelpers
 end

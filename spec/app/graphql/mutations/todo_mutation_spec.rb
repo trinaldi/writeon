@@ -1,54 +1,39 @@
 require 'rails_helper'
 
-describe 'Todo[s] Mutation', type: :request do
-  include_context 'GraphQL Client'
+describe 'Add Todo mutation', type: :request do
+  include_context 'with GraphQL Client'
 
-  context 'when a new to do is present' do
-    let(:my_post) { create(:post) }
-    let(:new_todo) { build(:todo) }
-    let(:new_todo_response) { graph_response[:data] }
-    let(:query) do
-      <<-GRAPHQL
-      mutation AddTodo($postId: String!, $done: Boolean!, $task: String!) {
-        addTodo(input: { postId: $postId, done: $done, task: $task }) {
-          errors
-          post {
-            body
-            id
-            title
-            comments {
-              id
-              message
-            }
-            todos {
-              id
-              done
-              task
-            }
+  let(:day) { create(:day) }
+  let(:todo) { attributes_for(:todo) }
+  let(:query) do
+    <<-GRAPHQL
+    mutation AddTodo($dayId: ID!, $task: String!, $done: Boolean) {
+      addTodo(input: { dayId: $dayId, task: $task, done: $done }) {
+        errors
+        day {
+          todos {
+            task
+            done
           }
         }
       }
-      GRAPHQL
-    end
+    }
+    GRAPHQL
+  end
 
-    before do
-      post_graph(query, {
-                   postId: my_post.id.to_s,
-                   done: new_todo.done,
-                   task: new_todo.task
-                 })
-      my_post.reload
-    end
+  let(:data) { graph_response['data']['addTodo'] }
 
-    it 'saves it' do
-      expect(my_post.todos.count).to eq(2)
-    end
+  it 'creates a todo for a day' do
+    post_graph(query, { dayId: day.id, task: todo[:task], done: todo[:done] })
+    day.reload
+    expect(data['day']['todos']).to include('task' => todo[:task], 'done' => todo[:done])
+    expect(day.todos.count).to eq(1)
+  end
 
-    it 'has the correct data' do
-      expect(new_todo_response['addTodo']['post']['todos'][1]).to include(
-        'done' => new_todo.done,
-        'task' => new_todo.task
-      )
-    end
+  it 'fails if day_id does not exist' do
+    post_graph(query, { dayId: 'nonexistent', task: todo[:task] })
+
+    expect(data['errors']).to include('Day not found')
+    expect(data['todo']).to be_nil
   end
 end

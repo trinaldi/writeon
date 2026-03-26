@@ -1,23 +1,18 @@
 module Mutations
   class AddTodo < Mutations::BaseMutation
-    argument :done, Boolean, required: true, description: 'Name (optional)'
-    argument :post_id, String, required: true, description: 'Post ID'
-    argument :task, String, required: true, description: 'Message body'
-
+    argument :day_id, ID, required: true
+    argument :done, Boolean, required: false
+    argument :task, String, required: true
     field :errors, [String], null: false
-    field :post, Types::PostType, null: false
+    field :day, Types::DayType, null: true
 
-    def resolve(post_id:, task:, done:)
-      @post = Post.find(post_id)
-      @todo = Todo.new(done: done, task: task)
-
-      if @todo.valid?
-        @post.todos << @todo
-
-        { post: @post, errors: [] }
-      else
-        { post: nil, errors: post.errors.full_messages }
-      end
+    def resolve(day_id:, task:, done: false)
+      day = Day.find(day_id)
+      day.todos.build(task: task, done: done)
+      day.save
+      { day: day.persisted? ? day : nil, errors: day.errors.full_messages }
+    rescue Mongoid::Errors::DocumentNotFound
+      { day: nil, errors: ['Day not found'] }
     end
   end
 end

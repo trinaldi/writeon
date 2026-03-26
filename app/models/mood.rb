@@ -4,5 +4,5 @@ class Mood
 
   as_enum :mood, %i[very_bad bad neutral good very_good]
 
-  embedded_in :post
+  embedded_in :day
 end

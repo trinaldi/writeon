@@ -1,7 +1,9 @@
-require:
+plugins:
+  - rubocop-factory_bot
   - rubocop-graphql
   - rubocop-performance
   - rubocop-rails
+  - rubocop-rspec
 AllCops:
   NewCops: enable
 Style/FrozenStringLiteralComment:
@@ -20,6 +22,10 @@ GraphQL/ExtractType:
   Enabled: false
 GraphQL/ExtractInputType:
   Enabled: false
+GraphQL/OrderedFields:
+  Enabled: false
+RSpec/MultipleExpectations:
+  Max: 2
 Metrics/BlockLength:
   Exclude:
     - 'spec/**/*'

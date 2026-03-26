@@ -1,25 +1,18 @@
 require 'rails_helper'
 
 describe 'Update to do mutation', type: :request do
-  include_context 'GraphQL Client'
+  include_context 'with GraphQL Client'
 
   context 'when to do is updated' do
-    let(:my_todo) { build(:todo, done: false) }
-    let(:my_post) { create(:post, todos: [my_todo]) }
+    let!(:day) { create(:day, todos: [{ task: 'update me', done: false }]) }
     let(:query) do
       <<-GRAPHQL
-      mutation UpdateTodo($done: Boolean!, $postId: String!, $todoId: String!){
-        updateTodo(input: { done: $done , postId: $postId, todoId: $todoId  }) {
+      mutation UpdateTodo($done: Boolean!, $dayId: String!, $todoId: String!){
+        updateTodo(input: { done: $done , dayId: $dayId, todoId: $todoId  }) {
                 errors
-                post {
+                day {
                   id
-                  title
-                  body
-                  comments {
-                    id
-                    name
-                    message
-                  }
+                  date
                   todos {
                     id
                     done
@@ -33,15 +26,34 @@ describe 'Update to do mutation', type: :request do
 
     before do
       post_graph(query, {
-                   postId: my_post.id.to_s,
-                   todoId: my_post.todos.first.id.to_s,
+                   dayId: day.id.to_s,
+                   todoId: day.todos.first.id.to_s,
                    done: true
                  })
-      my_post.reload
     end
 
-    it 'correctlies update it' do
-      expect(my_post.todos.first.done).to be(true)
+    it 'correctly updates it' do
+      expect(day.reload.todos.first.done).to be(true)
+    end
+
+    context 'when day is not found' do
+      before do
+        post_graph(query, { dayId: 'invalid_id', todoId: 'invalid_id', done: true })
+      end
+
+      it 'returns an error' do
+        expect(graph_response['data']['updateTodo']['errors']).to include('Record not found')
+      end
+    end
+
+    context 'when todo is not found' do
+      before do
+        post_graph(query, { dayId: day.id.to_s, todoId: 'invalid_id', done: true })
+      end
+
+      it 'returns an error' do
+        expect(graph_response['data']['updateTodo']['errors']).to include('Record not found')
+      end
     end
   end
 end
