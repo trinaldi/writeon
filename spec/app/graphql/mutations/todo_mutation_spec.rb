@@ -19,7 +19,7 @@ describe 'Add Todo mutation', type: :request do
     }
     GRAPHQL
   end
-  
+
   let(:data) { graph_response['data']['addTodo'] }
 
   it 'creates a todo for a day' do

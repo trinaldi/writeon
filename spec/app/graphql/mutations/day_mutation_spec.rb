@@ -29,8 +29,8 @@ describe 'Add Day mutation', type: :request do
 
     it 'has the correct data' do
       expect(graph_response['data']['addDay']['day']).to include({
-                                                             'date' => my_day.date.to_s
-                                                           })
+                                                                   'date' => my_day.date.to_s
+                                                                 })
     end
 
     it 'does not allow duplicate dates' do
