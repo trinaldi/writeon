@@ -7,16 +7,12 @@ module Mutations
     field :day, Types::DayType, null: false
 
     def resolve(mood:, day_id:)
-      @day = Day.find(day_id)
-      @mood = Mood.new(mood: mood)
-
-      if @mood.valid?
-        @day.mood = @mood
-
-        { day: @day, errors: [] }
-      else
-        { day: nil, errors: day.errors.full_messages }
-      end
+      day = Day.find(day_id)
+      day.build_mood(mood: mood)
+      day.save
+      { day: day, errors: day.errors.full_messages }
+    rescue Mongoid::Errors::DocumentNotFound
+      { day: nil, errors: ['Day not found'] }
     end
   end
 end

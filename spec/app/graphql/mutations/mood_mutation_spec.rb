@@ -4,32 +4,20 @@ describe 'Mood Mutation', type: :request do
   include_context 'GraphQL Client'
 
   context 'when a new mood is present' do
-    let(:my_post) { create(:post, mood: nil) }
+    let!(:day) { create(:day) }
     let(:new_mood) { build(:mood) }
-    let(:new_mood_response) { graph_response[:data] }
     let(:query) do
       <<-GRAPHQL
-      mutation AddMood( $mood: String!, $postId: String! ) {
-        addMood(input: { mood: $mood, postId: $postId}) {
+      mutation AddMood( $mood: String!, $dayId: String! ) {
+        addMood(input: { mood: $mood, dayId: $dayId}) {
           clientMutationId
           errors
-          post {
-            body
-            comments {
-              id
-              message
-              name
-            }
+          day {
             id
+            date
             mood {
               id
               mood
-            }
-            title
-            todos {
-              done
-              id
-              task
             }
           }
         }
@@ -38,16 +26,12 @@ describe 'Mood Mutation', type: :request do
     end
 
     before do
-      post_graph(query, { mood: new_mood.mood, postId: my_post.id.to_s })
-      my_post.reload
-    end
-
-    it 'saves it' do
-      expect(my_post.mood).to be_truthy
+      post_graph(query, { mood: new_mood.mood, dayId: day.id.to_s })
     end
 
     it 'has the correct data' do
-      expect(new_mood_response['addMood']['post']['mood']).to include(
+      expect(graph_response['data']['addMood']['day']['mood']).to eq(
+        'id' => day.reload.mood.id.to_s,
         'mood' => new_mood.mood.to_s
       )
     end

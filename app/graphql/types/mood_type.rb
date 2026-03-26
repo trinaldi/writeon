@@ -7,5 +7,9 @@ module Types
 
     field :mood, MoodEnum, null: false,
                            description: 'Mood level for the day'
+
+    def mood
+      object.mood.to_s
+    end
   end
 end
