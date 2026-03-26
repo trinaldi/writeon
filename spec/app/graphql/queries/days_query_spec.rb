@@ -4,13 +4,8 @@ describe 'Days Query', type: :request do
   include_context 'GraphQL Client'
 
   context 'when calling days query' do
-    let!(:day) { create(:day) }
-    let!(:todos) { create_list(:todo, 2, day: day) }
-    let!(:journal) { day.create_journal(attributes_for(:journal)) }
-    let!(:note) { day.journal.notes.create!(attributes_for(:note)) }
-    let!(:movies) { day.movies.create!(attributes_for(:movie)) }
-
-    let(:query) do
+    let!(:day) { create(:day, :full) }
+    let!(:query) do
       <<-GRAPHQL
     {
       days {
@@ -30,23 +25,25 @@ describe 'Days Query', type: :request do
           }
         }
         movies {
+          id
           title
           year
           rating
+          plot
+          review
+          watchedAt
         }
       }
     }
       GRAPHQL
     end
 
-    let(:days_query_response) { graph_response[:data] }
-
     let(:expected_response) do
       {
         'days' => [{
           'id' => day.id.to_s,
           'date' => day.date.to_s,
-          'todos' => todos.map do |t|
+          'todos' => day.todos.map do |t|
             {
               'id' => t.id.to_s,
               'done' => t.done,
@@ -54,8 +51,8 @@ describe 'Days Query', type: :request do
             }
           end,
           'journal' => {
-            'content' => journal.content,
-            'notes' => journal.notes.map do |n|
+            'content' => day.journal.content,
+            'notes' => day.journal.notes.map do |n|
               {
                 'id' => n.id.to_s,
                 'content' => n.content,
@@ -63,11 +60,17 @@ describe 'Days Query', type: :request do
               }
             end
           },
-          'movies' => [{
-            'title' => movies.title,
-            'year' => movies.year,
-            'rating' => movies.rating
-          }]
+          'movies' => day.movies.map do |m|
+            {
+              'id' => m.id.to_s,
+              'title' => m.title,
+              'year' => m.year,
+              'rating' => m.rating,
+              'plot' => m.plot,
+              'review' => m.review,
+              'watchedAt' => m.watched_at.iso8601
+            }
+          end
         }]
       }
     end
@@ -77,7 +80,7 @@ describe 'Days Query', type: :request do
     end
 
     it 'returns the days with associations' do
-      expect(days_query_response).to eq(expected_response)
+      expect(graph_response[:data]).to eq(expected_response)
     end
   end
 end

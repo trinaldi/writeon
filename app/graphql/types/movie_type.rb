@@ -14,6 +14,9 @@ module Types
     field :rating, Integer, null: false,
                             description: 'Rating given to the movie, from 1 to 5'
 
+    field :plot, String, null: true,
+                           description: 'Optional original plot from the movie'
+
     field :review, String, null: true,
                            description: 'Optional personal review of the movie'
 
