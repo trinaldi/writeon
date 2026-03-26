@@ -10,7 +10,7 @@ module Mutations
       day = Day.find(day_id)
       day.build_mood(mood: mood)
       day.save
-      { day: day, errors: day.errors.full_messages }
+      { day: day.persisted? ? day : nil, errors: day.errors.full_messages }
     rescue Mongoid::Errors::DocumentNotFound
       { day: nil, errors: ['Day not found'] }
     end

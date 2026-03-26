@@ -12,7 +12,7 @@ module Mutations
       todo = day.todos.find(todo_id)
       todo.update(done: done)
 
-      { day: day, errors: day.errors.full_messages }
+      { day: day.persisted? ? day : nil, errors: day.errors.full_messages }
     rescue Mongoid::Errors::DocumentNotFound
       { day: nil, errors: ['Record not found'] }
     end

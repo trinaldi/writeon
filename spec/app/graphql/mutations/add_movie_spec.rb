@@ -11,11 +11,12 @@ describe 'Add Movie mutation', type: :request do
     mutation AddMovie($dayId: ID!, $title: String!, $year: Int!, $rating: Int!) {
       addMovie(input: { dayId: $dayId, title: $title, year: $year, rating: $rating }) {
         errors
-        movie {
-          id
-          title
-          year
-          rating
+        day {
+          movies {
+            title
+            year
+            rating
+          }
         }
       }
     }
@@ -33,7 +34,7 @@ describe 'Add Movie mutation', type: :request do
     end
 
     it 'has the correct data' do
-      expect(graph_response['data']['addMovie']['movie']).to include(
+      expect(graph_response['data']['addMovie']['day']['movies']).to include(
         'title' => new_movie.title,
         'year' => new_movie.year,
         'rating' => new_movie.rating

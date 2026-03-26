@@ -4,15 +4,15 @@ module Mutations
     argument :done, Boolean, required: false
     argument :task, String, required: true
     field :errors, [String], null: false
-    field :todo, Types::TodoType, null: true
+    field :day, Types::DayType, null: true
 
     def resolve(day_id:, task:, done: false)
       day = Day.find(day_id)
-      todo = day.todos.build(task: task, done: done)
-      todo.save
-      { todo: todo, errors: todo.errors.full_messages }
+      day.todos.build(task: task, done: done)
+      day.save
+      { day: day.persisted? ? day : nil, errors: day.errors.full_messages }
     rescue Mongoid::Errors::DocumentNotFound
-      { todo: nil, errors: ['Day not found'] }
+      { day: nil, errors: ['Day not found'] }
     end
   end
 end

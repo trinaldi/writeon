@@ -9,16 +9,16 @@ module Mutations
     argument :year, Integer, required: true, description: 'Release year'
 
     field :errors, [String], null: false
-    field :movie, Types::MovieType, null: true
+    field :day, Types::DayType, null: true
 
     def resolve(day_id:, title:, year:, rating:, plot: nil, review: nil, watched_at: nil) # rubocop:disable Metrics/ParameterLists
       day = Day.find(day_id)
-      movie = day.movies.build(title: title, year: year, rating: rating, plot: plot, review: review,
-                               watched_at: watched_at)
-      movie.save
-      { movie: movie, errors: movie.errors.full_messages }
+      day.movies.build(title: title, year: year, rating: rating, plot: plot, review: review,
+                       watched_at: watched_at)
+      day.save
+      { day: day.persisted? ? day : nil, errors: day.errors.full_messages }
     rescue Mongoid::Errors::DocumentNotFound
-      { movie: nil, errors: ['Day not found'] }
+      { day: nil, errors: ['Day not found'] }
     end
   end
 end

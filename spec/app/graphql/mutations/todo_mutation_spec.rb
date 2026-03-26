@@ -10,10 +10,11 @@ describe 'Add Todo mutation', type: :request do
     mutation AddTodo($dayId: ID!, $task: String!, $done: Boolean) {
       addTodo(input: { dayId: $dayId, task: $task, done: $done }) {
         errors
-        todo {
-          id
-          task
-          done
+        day {
+          todos {
+            task
+            done
+          }
         }
       }
     }
@@ -25,8 +26,7 @@ describe 'Add Todo mutation', type: :request do
   it 'creates a todo for a day' do
     post_graph(query, { dayId: day.id, task: todo[:task], done: todo[:done] })
     day.reload
-
-    expect(data['todo']).to include('task' => todo[:task], 'done' => todo[:done])
+    expect(data['day']['todos']).to include('task' => todo[:task], 'done' => todo[:done])
     expect(day.todos.count).to eq(1)
   end
 
