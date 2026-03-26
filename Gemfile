@@ -30,10 +30,12 @@ group :development, :test do
   gem 'faker'
   gem 'rspec-rails'
   gem 'rubocop', require: false
+  gem 'rubocop-factory_bot'
   gem 'rubocop-graphql', require: false
   gem 'rubocop-performance'
   gem 'rubocop-rails', require: false
   gem 'rubocop-rspec'
+  gem 'rubocop-rspec_rails'
 end
 
 group :development do
