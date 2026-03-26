@@ -19,6 +19,8 @@ are the requisites. Having said that, use `bundler` to install the dependencies:
 
 then open the server `rails s`, which will default to port `5000`
 
+Test the API with GraphiQL on `localhost:5000/graphiql`
+
 ## Contributing
 
 Follow the rules on `.rubocop.yml` and make sure to test _everything_ before
