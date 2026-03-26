@@ -35,5 +35,25 @@ describe 'Update to do mutation', type: :request do
     it 'correctly updates it' do
       expect(day.reload.todos.first.done).to be(true)
     end
+
+    context 'when day is not found' do
+      before do
+        post_graph(query, { dayId: 'invalid_id', todoId: 'invalid_id', done: true })
+      end
+
+      it 'returns an error' do
+        expect(graph_response['data']['updateTodo']['errors']).to include('Record not found')
+      end
+    end
+
+    context 'when todo is not found' do
+      before do
+        post_graph(query, { dayId: day.id.to_s, todoId: 'invalid_id', done: true })
+      end
+
+      it 'returns an error' do
+        expect(graph_response['data']['updateTodo']['errors']).to include('Record not found')
+      end
+    end
   end
 end

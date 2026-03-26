@@ -35,5 +35,15 @@ describe 'Mood Mutation', type: :request do
         'mood' => new_mood.mood.to_s
       )
     end
+
+    context 'when day is not found' do
+      before do
+        post_graph(query, { mood: new_mood.mood, dayId: 'invalid_id' })
+      end
+
+      it 'returns an error' do
+        expect(graph_response['data']['addMood']['errors']).to include('Day not found')
+      end
+    end
   end
 end

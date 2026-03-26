@@ -5,7 +5,7 @@ module Mutations
     argument :todo_id, String, required: true
 
     field :errors, [String], null: false
-    field :day, Types::DayType, null: false
+    field :day, Types::DayType, null: true
 
     def resolve(todo_id:, done:, day_id:)
       day = Day.find(day_id)

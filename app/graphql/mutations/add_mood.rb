@@ -4,7 +4,7 @@ module Mutations
     argument :mood, String, required: true, description: 'Current Mood'
 
     field :errors, [String], null: false
-    field :day, Types::DayType, null: false
+    field :day, Types::DayType, null: true
 
     def resolve(mood:, day_id:)
       day = Day.find(day_id)
