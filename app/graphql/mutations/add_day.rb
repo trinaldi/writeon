@@ -6,7 +6,7 @@ module Mutations
 
     def resolve(date:)
       day = Day.create(date: date)
-      { day: day, errors: day.errors.full_messages }
+      { day: day.persisted? ? day : nil, errors: day.errors.full_messages }
     end
   end
 end
