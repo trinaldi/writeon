@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe 'Mood Mutation', type: :request do
-  include_context 'GraphQL Client'
+  include_context 'with GraphQL Client'
 
   context 'when a new mood is present' do
     let!(:day) { create(:day) }

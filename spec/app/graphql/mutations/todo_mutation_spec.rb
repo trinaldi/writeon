@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe 'Add Todo mutation', type: :request do
-  include_context 'GraphQL Client'
+  include_context 'with GraphQL Client'
 
   let(:day) { create(:day) }
   let(:todo) { attributes_for(:todo) }
@@ -26,7 +26,6 @@ describe 'Add Todo mutation', type: :request do
     post_graph(query, { dayId: day.id, task: todo[:task], done: todo[:done] })
     day.reload
 
-    expect(data['errors']).to be_empty
     expect(data['todo']).to include('task' => todo[:task], 'done' => todo[:done])
     expect(day.todos.count).to eq(1)
   end

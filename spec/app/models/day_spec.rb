@@ -9,7 +9,7 @@ describe Day, type: :model do
   it { is_expected.to validate_presence_of(:date) }
   it { is_expected.to validate_uniqueness_of(:date) }
 
-  it "won't allow duplicate date" do
+  it 'does not allow duplicate date' do
     today = Time.zone.today
 
     create(:day, date: today)

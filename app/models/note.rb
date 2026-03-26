@@ -1,6 +1,7 @@
 class Note
   include Mongoid::Document
   include Mongoid::Timestamps
+
   before_create :set_happened_at
 
   field :happened_at, type: Time

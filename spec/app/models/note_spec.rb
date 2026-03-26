@@ -7,14 +7,15 @@ describe Note, type: :model do
   it { is_expected.to be_embedded_in(:journal) }
   it { is_expected.to validate_presence_of(:content) }
 
-  it 'sets happened_at to current time if not provided' do
-    freeze_time do
-      day = create(:day, date: Time.zone.today)
-      journal = day.create_journal(attributes_for(:journal))
+  context 'with happened_at behavior' do
+    let!(:day) { create(:day, date: Time.zone.today) }
+    let!(:journal) { day.create_journal(attributes_for(:journal)) }
 
-      note = journal.notes.create!(attributes_for(:note).except(:happened_at))
-
-      expect(note.happened_at).to eq(Time.zone.now)
+    it 'defaults to current time if not provided' do
+      freeze_time do
+        note = journal.notes.create!(attributes_for(:note).except(:happened_at))
+        expect(note.happened_at).to eq(Time.zone.now)
+      end
     end
   end
 end

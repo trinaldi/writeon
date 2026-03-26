@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe 'Update to do mutation', type: :request do
-  include_context 'GraphQL Client'
+  include_context 'with GraphQL Client'
 
   context 'when to do is updated' do
     let!(:day) { create(:day, todos: [{ task: 'update me', done: false }]) }

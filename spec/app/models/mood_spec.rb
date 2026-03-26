@@ -5,7 +5,7 @@ RSpec.describe Mood, type: :model do
   it { is_expected.to be_embedded_in(:day) }
 
   it 'defines mood enum values' do
-    expect(Mood.moods.keys).to contain_exactly(
+    expect(described_class.moods.keys).to contain_exactly(
       'very_bad', 'bad', 'neutral', 'good', 'very_good'
     )
   end

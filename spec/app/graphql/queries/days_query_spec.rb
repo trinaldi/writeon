@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe 'Days Query', type: :request do
-  include_context 'GraphQL Client'
+  include_context 'with GraphQL Client'
 
   context 'when calling days query' do
     let!(:day) { create(:day, :full) }

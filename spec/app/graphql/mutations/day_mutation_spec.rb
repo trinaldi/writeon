@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe 'Add Day mutation', type: :request do
-  include_context 'GraphQL Client'
+  include_context 'with GraphQL Client'
 
   context 'when a new day is created' do
     let(:my_day) { build(:day, date: Date.new(2026, 3, 25)) }
@@ -23,11 +23,8 @@ describe 'Add Day mutation', type: :request do
       post_graph(query, { date: my_day.date })
     end
 
-    it 'creates a day' do
+    it 'creates with the correct data' do
       expect(Day.count).to eq(1)
-    end
-
-    it 'has the correct data' do
       expect(graph_response['data']['addDay']['day']).to include({
                                                                    'date' => my_day.date.to_s
                                                                  })
