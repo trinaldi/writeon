@@ -8,16 +8,13 @@ module Mutations
     field :day, Types::DayType, null: false
 
     def resolve(todo_id:, done:, day_id:)
-      @day = Post.find(day_id)
-      @todo = @day.todos.find(todo_id)
+      day = Day.find(day_id)
+      todo = day.todos.find(todo_id)
+      todo.update(done: done)
 
-      if @todo.valid?
-        @todo.update!(done: done)
-
-        { day: @day, errors: [] }
-      else
-        { day: nil, errors: day.errors.full_messages }
-      end
+      { day: day, errors: day.errors.full_messages }
+    rescue Mongoid::Errors::DocumentNotFound
+      { day: nil, errors: ['Record not found'] }
     end
   end
 end
