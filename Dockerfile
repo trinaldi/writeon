@@ -14,6 +14,6 @@ RUN bundle install
 
 COPY . .
 
-EXPOSE 5000
+EXPOSE 3000
 
-CMD ["foreman", "start", "-f", "Procfile"]
+CMD bundle exec rails server -b 0.0.0.0 -p ${PORT:-3000}
