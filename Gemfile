@@ -12,16 +12,13 @@ gem 'mongoid'
 gem 'mongoid-slug'
 gem 'puma', '>=6'
 gem 'rack-attack'
-gem 'rails', '7.1.5.2'
+gem 'rails', '8.0.5'
 gem 'simple_enum', require: 'simple_enum/mongoid'
-gem 'stimulus-rails'
-gem 'turbo-rails'
 gem 'tzinfo-data'
 
 group :test do
   gem 'database_cleaner-mongoid'
   gem 'mongoid-rspec'
-  gem 'timecop'
   gem 'webmock'
 end
 
@@ -41,7 +38,6 @@ end
 
 group :development do
   gem 'listen'
-  gem 'pre-commit'
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'web-console'
