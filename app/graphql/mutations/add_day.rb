@@ -5,8 +5,10 @@ module Mutations
     field :day, Types::DayType, null: true
 
     def resolve(date:)
-      day = Day.create(date: date)
-      { day: day.persisted? ? day : nil, errors: day.errors.full_messages }
+      {
+        day: nil,
+        errors: ["cheguei aqui"]
+      }
     end
   end
 end
