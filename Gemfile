@@ -6,14 +6,13 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby '3.3.0'
 
 gem 'bootsnap', require: false
-gem 'dotenv-rails', groups: %i[development test]
+gem 'dotenv-rails',  groups: %i[development test]
 gem 'graphiql-rails'
 gem 'graphql'
 gem 'mongoid'
 gem 'mongoid-slug'
 gem 'puma', '>=6'
 gem 'rack-attack'
-gem 'rack-cors'
 gem 'rails', '8.0.5'
 gem 'simple_enum', require: 'simple_enum/mongoid'
 gem 'tzinfo-data'
