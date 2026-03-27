@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: writeonapi
+    env: ruby
+    buildCommand: bundle install
+    startCommand: bundle exec rails server -p $PORT -e production
+    envVars:
+      - key: RAILS_ENV
+        value: production
+      - key: MONGODB_URI
+        fromDatabase: false
