@@ -42,3 +42,5 @@ group :development do
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'web-console'
 end
+
+gem "dockerfile-rails", ">= 1.7", :group => :development
