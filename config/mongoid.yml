@@ -1,7 +1,7 @@
 production:
   clients:
     default:
-      uri: <%= ENV['MONGODB_URI'] %>
+      uri: <%= Rails.application.credentials.dig(:mongo, :uri) %>
       options:
         database: writeonapi
 
