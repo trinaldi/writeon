@@ -2,15 +2,15 @@ production:
   clients:
     default:
       uri: <%= ENV['MONGO_URI'] %>
-    options:
-      database: writeonapi
+      options:
+        database: writeonapi
 
 development:
   clients:
     default:
       uri: <%= ENV['MONGODB_URI'] %>
-    options:
-      database: writeonapi
+      options:
+        database: writeonapi
 
 test:
   clients:

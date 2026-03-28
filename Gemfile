@@ -6,7 +6,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby '3.3.0'
 
 gem 'bootsnap', require: false
-gem 'dotenv-rails',  groups: %i[development test]
+gem 'dotenv-rails', groups: %i[development test]
 gem 'graphiql-rails'
 gem 'graphql'
 gem 'mongoid'
