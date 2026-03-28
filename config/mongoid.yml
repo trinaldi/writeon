@@ -1,16 +1,16 @@
 production:
   clients:
     default:
-      uri: <%= Rails.application.credentials.dig(:mongo, :uri) %>
-      options:
-        database: writeonapi
+      uri: <%= ENV['MONGO_URI'] %>
+    options:
+      database: writeonapi
 
 development:
   clients:
     default:
       uri: <%= ENV['MONGODB_URI'] %>
-      options:
-        database: writeonapi
+    options:
+      database: writeonapi
 
 test:
   clients:
