@@ -1,15 +1,21 @@
-FROM ruby:3.3.0-alpine
+FROM ruby:4.0.5-alpine
 
 RUN apk add --no-cache \
   build-base \
   git \
   tzdata \
   nodejs \
-  yarn
+  yarn \
+  yaml \
+  yaml-dev \
+  coreutils
 
 WORKDIR /app
 
 COPY Gemfile Gemfile.lock ./
+
+RUN gem install bundler -v 4.0.13
+
 RUN bundle install
 
 COPY . .

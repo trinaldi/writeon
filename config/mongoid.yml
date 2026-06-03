@@ -1,7 +1,7 @@
 production:
   clients:
     default:
-      uri: <%= ENV['MONGO_URI'] %>
+      uri: <%= ENV['MONGODB_URI'] %>
       options:
         database: writeonapi
 
@@ -15,9 +15,7 @@ development:
 test:
   clients:
     default:
-      database: blog_test
-      hosts:
-        - localhost:27017
+      uri: <%= ENV.fetch('MONGODB_URI', 'mongodb://127.0.0.1:27017/writeon_test') %>
       options:
         read:
           mode: :primary
