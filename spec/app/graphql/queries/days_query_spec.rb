@@ -7,34 +7,34 @@ describe 'Days Query', type: :request do
     let!(:day) { create(:day, :full) }
     let!(:query) do
       <<-GRAPHQL
-    {
-      days {
-        id
-        date
-        todos {
+      {
+        days {
           id
-          done
-          task
-        }
-        journal {
-          content
-          notes {
+          date
+          todos {
             id
+            done
+            task
+          }
+          journal {
             content
-            happenedAt
+            notes {
+              id
+              content
+              happenedAt
+            }
+          }
+          movies {
+            id
+            title
+            year
+            rating
+            plot
+            review
+            watchedAt
           }
         }
-        movies {
-          id
-          title
-          year
-          rating
-          plot
-          review
-          watchedAt
-        }
       }
-    }
       GRAPHQL
     end
 
