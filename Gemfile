@@ -3,11 +3,10 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '4.0.2'
+ruby '4.0.5'
 
 gem 'bootsnap', require: false
 gem 'dotenv-rails', groups: %i[development test]
-gem 'graphiql-rails'
 gem 'graphql'
 gem 'mongoid'
 gem 'mongoid-slug'
@@ -27,6 +26,7 @@ group :development, :test do
   gem 'byebug', platforms: %i[mri windows]
   gem 'factory_bot_rails'
   gem 'faker'
+  gem 'mutex_m'
   gem 'rspec-rails'
   gem 'rubocop', require: false
   gem 'rubocop-factory_bot'
@@ -38,8 +38,7 @@ group :development, :test do
 end
 
 group :development do
+  gem 'graphiql-rails'
   gem 'listen'
-  gem 'spring'
-  gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'web-console'
 end

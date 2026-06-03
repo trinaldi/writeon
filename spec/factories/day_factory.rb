@@ -15,7 +15,6 @@ FactoryBot.define do
       end
     end
 
-
     trait :with_movies do
       after(:create) do |day|
         day.movies.create!(FactoryBot.attributes_for(:movie))
