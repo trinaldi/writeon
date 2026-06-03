@@ -53,3 +53,4 @@ tags
 [._]*.un~
 
 .env
+.env.production
