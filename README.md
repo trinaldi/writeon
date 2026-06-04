@@ -8,9 +8,9 @@ Frontend code has its own repository, [WriteOn-Web](https://github.com/trinaldi/
 ## Installing
 
 ```sh
-Ruby 3.3.0
-Rails 7.1.5.2
-MongoDB 8.0.12
+Ruby 4.0.5
+Rails 8.0.5
+MongoDB 8.0.34
 ```
 
 are the requisites. Having said that, use `bundler` to install the dependencies:
