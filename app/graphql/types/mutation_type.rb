@@ -1,5 +1,6 @@
 module Types
   class MutationType < Types::BaseObject
+    field :add_affirmation, mutation: Mutations::AddAffirmation
     field :add_mood, mutation: Mutations::AddMood
     field :add_movie, mutation: Mutations::AddMovie
     field :add_day, mutation: Mutations::AddDay
