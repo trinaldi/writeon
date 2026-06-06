@@ -4,6 +4,7 @@ describe 'Days Query', type: :request do
   include_context 'with GraphQL Client'
 
   context 'when calling days query' do
+    let!(:user) { create(:user) }
     let!(:day) { create(:day, :full) }
     let!(:query) do
       <<-GRAPHQL
@@ -76,7 +77,7 @@ describe 'Days Query', type: :request do
     end
 
     before do
-      post_graph(query)
+      post_graph(query, context: { current_user: user })
     end
 
     it 'returns the days with associations' do

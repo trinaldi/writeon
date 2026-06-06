@@ -4,6 +4,7 @@ describe 'Add Day mutation', type: :request do
   include_context 'with GraphQL Client'
 
   context 'when a new day is created' do
+    let(:user) { create(:user) }
     let(:my_day) { build(:day, date: Date.new(2026, 3, 25)) }
     let(:query) do
       <<-GRAPHQL
@@ -20,7 +21,11 @@ describe 'Add Day mutation', type: :request do
     end
 
     before do
-      post_graph(query, { date: my_day.date })
+      post_graph(
+        query,
+        { date: my_day.date },
+        context: { current_user: user }
+      )
     end
 
     it 'creates with the correct data' do
@@ -32,7 +37,7 @@ describe 'Add Day mutation', type: :request do
 
     it 'does not allow duplicate dates' do
       dummy_day = build(:day, date: my_day.date)
-      post_graph(query, { date: dummy_day.date })
+      post_graph(query, { date: dummy_day.date }, context: { current_user: user })
 
       expect(graph_response['data']['addDay']['errors']).to include('Date has already been taken')
       expect(Day.count).to eq(1)

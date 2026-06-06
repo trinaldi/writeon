@@ -4,5 +4,19 @@ module Mutations
     field_class Types::BaseField
     input_object_class Types::BaseInputObject
     object_class Types::BaseObject
+
+    def ready?(**args)
+      raise GraphQL::ExecutionError, 'Not authenticated' unless context[:current_user]
+
+      super
+    end
+
+    def current_user
+      context[:current_user]
+    end
+
+    def authenticate_user!
+      raise GraphQL::ExecutionError, 'Not authenticated' unless current_user
+    end
   end
 end
