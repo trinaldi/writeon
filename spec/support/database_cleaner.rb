@@ -1,11 +1,9 @@
 RSpec.configure do |config|
   config.before(:suite) do
-    DatabaseCleaner[:mongoid].clean
+    Mongoid.purge!
   end
 
-  config.around do |example|
-    DatabaseCleaner.cleaning do
-      example.run
-    end
+  config.after do
+    Mongoid.purge!
   end
 end

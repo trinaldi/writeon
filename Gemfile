@@ -20,7 +20,6 @@ gem 'simple_enum', require: 'simple_enum/mongoid'
 gem 'tzinfo-data'
 
 group :test do
-  gem 'database_cleaner-mongoid'
   gem 'mongoid-rspec'
   gem 'webmock'
 end

@@ -1,7 +1,8 @@
 require 'active_support/core_ext/integer/time'
 
 Rails.application.configure do
-  config.middleware.use Rack::Attack
+  config.hosts.clear
+  config.middleware.delete ActionDispatch::HostAuthorization
   config.cache_store = :memory_store
   config.cache_classes = true
   config.eager_load = false

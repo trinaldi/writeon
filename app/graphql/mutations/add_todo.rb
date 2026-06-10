@@ -7,6 +7,7 @@ module Mutations
     field :day, Types::DayType, null: true
 
     def resolve(day_id:, task:, done: false)
+      authenticate_user!
       day = Day.find(day_id)
       day.todos.build(task: task, done: done)
       day.save

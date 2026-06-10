@@ -7,6 +7,8 @@ module Mutations
     field :day, Types::DayType, null: true
 
     def resolve(mood:, day_id:)
+      authenticate_user!
+
       day = Day.find(day_id)
       day.build_mood(mood: mood)
       day.save
