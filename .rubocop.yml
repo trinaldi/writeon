@@ -25,7 +25,7 @@ GraphQL/ExtractInputType:
 GraphQL/OrderedFields:
   Enabled: false
 RSpec/MultipleExpectations:
-  Max: 2
+  Enabled: false
 Metrics/BlockLength:
   Exclude:
     - 'spec/**/*'

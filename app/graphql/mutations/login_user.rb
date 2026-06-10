@@ -7,7 +7,7 @@ module Mutations
     field :user_id, String, null: true
 
     def resolve(email:, password:)
-      user = find_user(email)
+      user = User.where(email: email.downcase.strip).first
 
       return auth_payload(user) if user&.authenticate(password)
 
