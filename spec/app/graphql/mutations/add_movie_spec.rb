@@ -29,8 +29,8 @@ describe 'Add Movie mutation', type: :request do
       post_graph(query, {
                    dayId: day.id.to_s,
                    title: new_movie.title,
-                   year: new_movie.year.to_i,
-                   rating: new_movie.rating.to_i
+                   year: new_movie.year,
+                   rating: new_movie.rating
                  }, context: { current_user: user })
     end
 
