@@ -8,7 +8,7 @@ RSpec.shared_context 'with GraphQL Client', shared_context: :metadata do
     end
 
     post '/graphql',
-         params: { query: query, variables: variables }, headers: headers
+         params: { query: query, variables: variables }, headers: headers, as: :json
   end
 
   def build_headers(context)

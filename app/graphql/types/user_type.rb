@@ -7,5 +7,8 @@ module Types
 
     field :token, String, null: false,
                           description: 'JWT Token generated'
+
+    field :email, String, null: false,
+                          description: 'User email address'
   end
 end
