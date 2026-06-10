@@ -11,12 +11,11 @@ development:
       uri: <%= ENV['MONGODB_URI'] %>
       options:
         database: writeonapi
+        direct_connection: true
 
 test:
   clients:
     default:
-      uri: <%= ENV.fetch('MONGODB_URI', 'mongodb://127.0.0.1:27017/writeon_test') %>
+      uri: <%= ENV.fetch('MONGODB_URI', 'mongodb://localhost:27017/writeon_test') %>
       options:
-        read:
-          mode: :primary
-        max_pool_size: 1
+        server_selection_timeout: 5

@@ -8,6 +8,7 @@ module Mutations
     field :day, Types::DayType, null: true
 
     def resolve(todo_id:, done:, day_id:)
+      authenticate_user!
       day = Day.find(day_id)
       todo = day.todos.find(todo_id)
       todo.update(done: done)

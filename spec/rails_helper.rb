@@ -3,7 +3,7 @@ require 'spec_helper'
 ENV['RAILS_ENV'] ||= 'test'
 require_relative '../config/environment'
 # Prevent database truncation if the environment is production
-abort('The Rails environment is running in production mode!') if Rails.env.production?
+abort('The Rails environment is running in production mode!') if Rails.env.production? # rubocop:disable Rails/Exit
 require 'rspec/rails'
 # Add additional requires below this line. Rails is not loaded until this point!
 require 'mongoid-rspec'
@@ -30,6 +30,7 @@ RSpec.configure do |config|
   config.before(:each, type: :request) do
     Rack::Attack.enabled = true
     Rack::Attack.reset!
+    Rack::Attack.cache.store = ActiveSupport::Cache::MemoryStore.new
   end
   # If you enable ActiveRecord support you should unncomment these lines,
   # note if you'd prefer not to run each example within a transaction, you
