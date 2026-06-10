@@ -4,6 +4,7 @@ require 'rails_helper'
 describe 'Add Movie mutation', type: :request do
   include_context 'with GraphQL Client'
 
+  let!(:user) { create(:user) }
   let!(:day) { create(:day) }
   let(:new_movie) { build(:movie) }
   let(:query) do
@@ -28,9 +29,9 @@ describe 'Add Movie mutation', type: :request do
       post_graph(query, {
                    dayId: day.id.to_s,
                    title: new_movie.title,
-                   year: new_movie.year,
-                   rating: new_movie.rating
-                 })
+                   year: new_movie.year.to_i,
+                   rating: new_movie.rating.to_i
+                 }, context: { current_user: user })
     end
 
     it 'has the correct data' do
@@ -44,7 +45,12 @@ describe 'Add Movie mutation', type: :request do
 
   context 'when day is not found' do
     before do
-      post_graph(query, { dayId: 'invalid_id', title: new_movie.title, year: new_movie.year, rating: new_movie.rating })
+      post_graph(query,
+                 { dayId: 'invalid_id',
+                   title: new_movie.title,
+                   year: new_movie.year,
+                   rating: new_movie.rating },
+                 context: { current_user: user })
     end
 
     it 'returns an error' do
