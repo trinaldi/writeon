@@ -7,6 +7,7 @@ class User
   field :password_digest, type: String
 
   has_secure_password
+  has_many :days, dependent: :destroy
 
   index({ email: 1 }, { unique: true })
 
