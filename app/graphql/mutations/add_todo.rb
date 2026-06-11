@@ -8,7 +8,7 @@ module Mutations
 
     def resolve(day_id:, task:, done: false)
       authenticate_user!
-      day = Day.find(day_id)
+      day = current_user.days.find(day_id)
       day.todos.build(task: task, done: done)
       day.save
       { day: day.persisted? ? day : nil, errors: day.errors.full_messages }

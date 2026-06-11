@@ -7,7 +7,7 @@ module Mutations
     def resolve(date:)
       authenticate_user!
 
-      day = Day.create(date: date)
+      day = current_user.days.create(date: date)
 
       { day: day.persisted? ? day : nil, errors: day.errors.full_messages }
     rescue StandardError => e
