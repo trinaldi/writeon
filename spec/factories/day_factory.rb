@@ -1,5 +1,7 @@
 FactoryBot.define do
   factory :day do
+    user
+
     sequence(:date) { |n| Time.zone.today - n.days }
 
     trait :with_todos do

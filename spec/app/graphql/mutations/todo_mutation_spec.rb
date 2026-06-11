@@ -4,7 +4,6 @@ require 'rails_helper'
 describe 'Add Todo mutation', type: :request do
   include_context 'with GraphQL Client'
 
-  let!(:user) { create(:user) }
   let(:day) { create(:day) }
   let(:todo) { attributes_for(:todo) }
   let(:query) do
@@ -32,14 +31,14 @@ describe 'Add Todo mutation', type: :request do
   end
 
   it 'creates a todo for a day' do
-    post_graph(query, { dayId: day.id, task: todo[:task], done: todo[:done] }, context: { current_user: user })
+    post_graph(query, { dayId: day.id, task: todo[:task], done: todo[:done] }, context: { current_user: day.user })
     day.reload
     expect(data['day']['todos']).to include('task' => todo[:task], 'done' => todo[:done])
     expect(day.todos.count).to eq(1)
   end
 
   it 'fails if day_id does not exist' do
-    post_graph(query, { dayId: 'nonexistent', task: todo[:task] }, context: { current_user: user })
+    post_graph(query, { dayId: 'nonexistent', task: todo[:task] }, context: { current_user: day.user })
     expect(data['errors']).to include('Day not found')
     expect(data['todo']).to be_nil
   end
