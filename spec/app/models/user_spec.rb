@@ -5,6 +5,7 @@ describe User, type: :model do
   it { is_expected.to have_field(:email).of_type(String) }
   it { is_expected.to have_field(:password_digest).of_type(String) }
   it { is_expected.to have_many(:days) }
+  it { is_expected.to have_many(:affirmations) }
 
   it { is_expected.to validate_presence_of(:email) }
   it { is_expected.to validate_uniqueness_of(:email) }

@@ -22,7 +22,7 @@ module Mutations
 
     def auth_payload(user)
       {
-        token: user.generate_auth_token,
+        token: Auth::JwtEncoder.call(user),
         user_id: user.id.to_s
       }
     end

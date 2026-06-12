@@ -8,6 +8,7 @@ class User
 
   has_secure_password
   has_many :days, dependent: :destroy
+  has_many :affirmations, dependent: :destroy
 
   index({ email: 1 }, { unique: true })
 

@@ -11,4 +11,8 @@ module Types
     field :email, String, null: false,
                           description: 'User email address'
   end
+
+  def token
+    object.generate_auth_token
+  end
 end

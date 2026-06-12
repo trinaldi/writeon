@@ -8,3 +8,6 @@ en:
     created: "Comment successfully created."
     updated: "Comment successfully updated."
     destroyed: "Comment successfully destroyed."
+  affirmation:
+    errors:
+      not_created: "Body can't be blank"
