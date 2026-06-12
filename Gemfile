@@ -5,19 +5,21 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '4.0.5'
 
+gem 'bcrypt'
 gem 'bootsnap', require: false
 gem 'dotenv-rails', groups: %i[development test]
 gem 'graphql'
+gem 'jwt'
 gem 'mongoid'
 gem 'mongoid-slug'
 gem 'puma', '>=6'
 gem 'rack-attack'
+gem 'rack-cors'
 gem 'rails', '8.0.5'
 gem 'simple_enum', require: 'simple_enum/mongoid'
 gem 'tzinfo-data'
 
 group :test do
-  gem 'database_cleaner-mongoid'
   gem 'mongoid-rspec'
   gem 'webmock'
 end

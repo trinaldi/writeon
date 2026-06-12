@@ -3,61 +3,62 @@ require 'rails_helper'
 describe 'Days Query', type: :request do
   include_context 'with GraphQL Client'
 
-  context 'when calling days query' do
-    let!(:day) { create(:day, :full) }
-    let!(:query) do
-      <<-GRAPHQL
-      {
-        days {
+  let!(:user) { create(:user) }
+  let!(:day) { create(:day, :full) }
+  let!(:query) do
+    <<-GRAPHQL
+    {
+      days {
+        id
+        date
+        todos {
           id
-          date
-          todos {
+          done
+          task
+        }
+        journal {
+          content
+          notes {
             id
-            done
-            task
-          }
-          journal {
             content
-            notes {
-              id
-              content
-              happenedAt
-            }
-          }
-          movies {
-            id
-            title
-            year
-            rating
-            plot
-            review
-            watchedAt
+            happenedAt
           }
         }
+        movies {
+          id
+          title
+          year
+          rating
+          plot
+          review
+          watchedAt
+        }
       }
-      GRAPHQL
-    end
+    }
+    GRAPHQL
+  end
 
+  context 'when user is not authenticated' do
+    before { post_graph(query) }
+
+    it 'returns a not authenticated error' do
+      expect(graph_response['errors'].first['message']).to eq('Not authenticated')
+    end
+  end
+
+  context 'when calling days query' do
     let(:expected_response) do
       {
         'days' => [{
           'id' => day.id.to_s,
           'date' => day.date.to_s,
           'todos' => day.todos.map do |t|
-            {
-              'id' => t.id.to_s,
-              'done' => t.done,
-              'task' => t.task
-            }
+            { 'id' => t.id.to_s, 'done' => t.done, 'task' => t.task }
           end,
           'journal' => {
             'content' => day.journal.content,
             'notes' => day.journal.notes.map do |n|
-              {
-                'id' => n.id.to_s,
-                'content' => n.content,
-                'happenedAt' => n.happened_at.iso8601
-              }
+              { 'id' => n.id.to_s, 'content' => n.content, 'happenedAt' => n.happened_at.iso8601 }
             end
           },
           'movies' => day.movies.map do |m|
@@ -75,9 +76,7 @@ describe 'Days Query', type: :request do
       }
     end
 
-    before do
-      post_graph(query)
-    end
+    before { post_graph(query, context: { current_user: user }) }
 
     it 'returns the days with associations' do
       expect(graph_response[:data]).to eq(expected_response)

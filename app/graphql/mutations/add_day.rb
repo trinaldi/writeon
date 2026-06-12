@@ -5,17 +5,13 @@ module Mutations
     field :day, Types::DayType, null: true
 
     def resolve(date:)
-      day = Day.create(date: date)
+      authenticate_user!
 
-      {
-        day: day.persisted? ? day : nil,
-        errors: day.errors.full_messages
-      }
+      day = current_user.days.create(date: date)
+
+      { day: day.persisted? ? day : nil, errors: day.errors.full_messages }
     rescue StandardError => e
-      {
-        day: nil,
-        errors: [e.message]
-      }
+      { day: nil, errors: [e.message] }
     end
   end
 end

@@ -3,10 +3,6 @@ module Types
     include GraphQL::Types::Relay::HasNodeField
     include GraphQL::Types::Relay::HasNodesField
 
-    field :days, [Types::DayType], null: false, description: 'All days'
-
-    def days
-      Day.all.to_a
-    end
+    field :days, resolver: Resolvers::DaysResolver
   end
 end

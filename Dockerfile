@@ -1,11 +1,10 @@
 FROM ruby:4.0.5-alpine
 
+# Removido nodejs e yarn já que é uma API pura
 RUN apk add --no-cache \
   build-base \
   git \
   tzdata \
-  nodejs \
-  yarn \
   yaml \
   yaml-dev \
   coreutils
@@ -24,4 +23,4 @@ RUN mkdir -p tmp/pids tmp/cache tmp/sockets log
 
 EXPOSE 3000
 
-CMD bundle exec rails server -b 0.0.0.0 -p ${PORT:-3000}
+CMD ["bundle", "exec", "rails", "server", "-b", "0.0.0.0", "-p", "3000"]

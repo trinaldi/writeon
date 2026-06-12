@@ -1,3 +1,4 @@
+# docker-compose.yml
 services:
   mongo:
     image: 'mongo:8.0'
@@ -18,10 +19,26 @@ services:
       - mongo
     ports:
       - "3000:3000"
+    env_file:
+      - .env
     environment:
-      - RAILS_ENV=${RAILS_ENV}
+      - RAILS_ENV=${RAILS_ENV:-development}
       - MONGODB_URI=${MONGODB_URI}
 
+  test:
+    build: .
+    networks:
+      - app
+    volumes:
+      - ./:/app
+    depends_on:
+      - mongo
+    env_file:
+      - .env.test
+    environment:
+      - RAILS_ENV=test
+      - MONGODB_URI=mongodb://mongo:27017/writeon_test
+    command: bundle exec rspec
 
 networks:
   app:
