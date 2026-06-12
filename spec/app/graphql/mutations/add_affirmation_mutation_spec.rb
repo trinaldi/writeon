@@ -5,7 +5,7 @@ describe 'Add affirmation mutation', type: :request do
 
   let(:query) do
     <<-GRAPHQL
-    mutation AddAffirmation($body: String!, $author: String) {
+    mutation AddAffirmation($body: String, $author: String) {
       addAffirmation(input: { body: $body , author: $author }) {
         errors
         affirmation {
@@ -19,13 +19,15 @@ describe 'Add affirmation mutation', type: :request do
   end
 
   context 'when new affirmation is created' do
-    let(:affirmation) { build(:affirmation) }
+    let(:user) { create(:user) }
+    let(:affirmation) { build(:affirmation, user: user) }
 
     before do
       post_graph(query, {
                    body: affirmation.body,
                    author: affirmation.author
-                 })
+                 },
+                 context: { current_user: user })
     end
 
     it 'correctly creates it' do
@@ -36,26 +38,34 @@ describe 'Add affirmation mutation', type: :request do
     end
   end
 
-  context 'when body is nil' do
-    let(:affirmation) { build(:affirmation) }
+  context 'when body is blank' do
+    let(:user) { create(:user) }
+    let(:affirmation) { build(:affirmation, user: user) }
 
     before do
-      post_graph(query, { body: nil, author: affirmation.author })
+      post_graph(query, {
+                   body: '',
+                   author: affirmation.author
+                 },
+                 context: { current_user: user })
     end
 
     it 'returns an error' do
-      expect(graph_response['errors']).not_to be_empty
-      expect(graph_response['errors'][0]['message'])
-        .to include('Variable $body of type String! was provided invalid value')
+      expect(graph_response['data']['addAffirmation']['errors']).to include("Body can't be blank")
       expect(Affirmation.count).to eq(0)
     end
   end
 
-  context 'when body is blank' do
-    let(:affirmation) { build(:affirmation) }
+  context 'when body is nil' do
+    let(:user) { create(:user) }
+    let(:affirmation) { build(:affirmation, user: user) }
 
     before do
-      post_graph(query, { body: '', author: affirmation.author })
+      post_graph(query, {
+                   body: nil,
+                   author: affirmation.author
+                 },
+                 context: { current_user: user })
     end
 
     it 'returns a model validation error' do
@@ -65,10 +75,15 @@ describe 'Add affirmation mutation', type: :request do
   end
 
   context 'when author is not provided' do
-    let(:affirmation) { build(:affirmation) }
+    let(:user) { create(:user) }
+    let(:affirmation) { build(:affirmation, user: user) }
 
     before do
-      post_graph(query, { body: affirmation.body })
+      post_graph(query, {
+                   body: affirmation.body,
+                   author: nil
+                 },
+                 context: { current_user: user })
     end
 
     it 'creates affirmation without author' do
