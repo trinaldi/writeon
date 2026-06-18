@@ -2,10 +2,16 @@ module Resolvers
   class AffirmationsResolver < BaseResolver
     type [Types::AffirmationType], null: false
 
-    def resolve
+    argument :show, Boolean, required: false
+
+    def resolve(show: nil)
       authenticate_user!
-      
-      Affirmation.where(user: current_user, show: true)
+
+      scope = Affirmation.where(user: current_user)
+
+      scope = scope.where(show: show) unless show.nil?
+
+      scope
     end
   end
 end

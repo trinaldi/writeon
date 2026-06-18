@@ -4,44 +4,56 @@ describe 'Get Affirmations Query', type: :request do
   include_context 'with GraphQL Client'
 
   let!(:user) { create(:user) }
-  let!(:affirmation) { create(:affirmation, show: true, user: user) }
-  let!(:query) do
+  let!(:visible_affirmation) { create(:affirmation, show: true, user: user) }
+  let!(:hidden_affirmation)  { create(:affirmation, show: false, user: user) }
+  let(:query) do
     <<-GRAPHQL
-    {
-      affirmations {
+    query Affirmations($show: Boolean) {
+      affirmations(show: $show) {
         id
         body
-        author
         show
       }
     }
     GRAPHQL
   end
 
-  context 'when user is not authenticated' do
-    before { post_graph(query) }
+  context 'when filtering visible affirmations' do
+    before do
+      post_graph(query, { show: true }, context: { current_user: user })
+    end
 
-    it 'returns a not authenticated error' do
-      expect(graph_response['errors'].first['message']).to eq('Not authenticated')
+    it 'returns only visible affirmations' do
+      result = graph_response['data']['affirmations']
+
+      expect(result.length).to eq(1)
+      expect(result.first['id']).to eq(visible_affirmation.id.to_s)
+      expect(result.first['show']).to be(true)
     end
   end
 
-  context 'when calling days query' do
-    let(:expected_response) do
-      {
-        'affirmations' => [{
-          'id' => affirmation.id.to_s,
-          'body' => affirmation.body,
-          'author' => affirmation.author,
-          'show' => true
-        }]
-      }
+  context 'when filtering hidden affirmations' do
+    before do
+      post_graph(query, { show: false }, context: { current_user: user })
     end
 
-    before { post_graph(query, context: { current_user: user }) }
+    it 'returns only hidden affirmations' do
+      result = graph_response['data']['affirmations']
+      expect(result.length).to eq(1)
+      expect(result.first['id']).to eq(hidden_affirmation.id.to_s)
+      expect(result.first['show']).to be(false)
+    end
+  end
 
-    it 'returns the shown affirmations with associations' do
-      expect(graph_response[:data]).to eq(expected_response)
+  context 'when no filter is applied' do
+    before do
+      post_graph(query, {}, context: { current_user: user })
+    end
+
+    it 'returns all affirmations' do
+      result = graph_response['data']['affirmations']
+
+      expect(result.length).to eq(2)
     end
   end
 end
