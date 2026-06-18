@@ -1,4 +1,3 @@
-# spec/app/graphql/mutations/todo_mutation_spec.rb
 require 'rails_helper'
 
 describe 'Add Todo mutation', type: :request do
