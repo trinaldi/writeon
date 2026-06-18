@@ -6,6 +6,7 @@ class Affirmation
 
   field :body, type: String
   field :author, type: String
+  field :show, type: Boolean, default: true
 
   validates :body, presence: true
 end
