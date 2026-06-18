@@ -4,6 +4,5 @@ module Types
     include GraphQL::Types::Relay::HasNodesField
 
     field :days, resolver: Resolvers::DaysResolver
-    field :affirmations, resolver: Resolvers::AffirmationsResolver
   end
 end

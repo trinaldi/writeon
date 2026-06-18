@@ -5,14 +5,13 @@ describe 'Add affirmation mutation', type: :request do
 
   let(:query) do
     <<-GRAPHQL
-    mutation AddAffirmation($body: String, $author: String, $show: Boolean) {
-      addAffirmation(input: { body: $body , author: $author, show: $show }) {
+    mutation AddAffirmation($body: String, $author: String) {
+      addAffirmation(input: { body: $body , author: $author }) {
         errors
         affirmation {
           id
           body
           author
-          show
         }
       }
     }
@@ -26,8 +25,7 @@ describe 'Add affirmation mutation', type: :request do
     before do
       post_graph(query, {
                    body: affirmation.body,
-                   author: affirmation.author,
-                   show: affirmation.show
+                   author: affirmation.author
                  },
                  context: { current_user: user })
     end
@@ -36,7 +34,6 @@ describe 'Add affirmation mutation', type: :request do
       expect(Affirmation.count).to eq(1)
       expect(graph_response['data']['addAffirmation']['affirmation']['author']).to eq(affirmation.author)
       expect(graph_response['data']['addAffirmation']['affirmation']['body']).to eq(affirmation.body)
-      expect(graph_response['data']['addAffirmation']['affirmation']['show']).to eq(affirmation.show)
       expect(graph_response['data']['addAffirmation']['errors']).to be_empty
     end
   end
@@ -48,8 +45,7 @@ describe 'Add affirmation mutation', type: :request do
     before do
       post_graph(query, {
                    body: '',
-                   author: affirmation.author,
-                   show: affirmation.show
+                   author: affirmation.author
                  },
                  context: { current_user: user })
     end
@@ -67,8 +63,7 @@ describe 'Add affirmation mutation', type: :request do
     before do
       post_graph(query, {
                    body: nil,
-                   author: affirmation.author,
-                   show: affirmation.show
+                   author: affirmation.author
                  },
                  context: { current_user: user })
     end
@@ -86,8 +81,7 @@ describe 'Add affirmation mutation', type: :request do
     before do
       post_graph(query, {
                    body: affirmation.body,
-                   author: nil,
-                   show: affirmation.show
+                   author: nil
                  },
                  context: { current_user: user })
     end

@@ -8,6 +8,5 @@ module Types
     field :body, String, null: true, description: 'Body or content of the affirmation'
 
     field :author, String, null: true, description: 'Author of such affirmation'
-    field :show, Boolean, null: true, description: 'Is this affirmation shown?'
   end
 end
