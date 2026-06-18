@@ -52,7 +52,6 @@ describe 'Soft delete affirmation mutation', type: :request do
       end
     end
 
-
     context 'when affirmation is not found' do
       before do
         post_graph(query, { affirmationId: 'bogus_id' }, context: { current_user: user })
