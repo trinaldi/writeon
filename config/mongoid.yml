@@ -10,7 +10,6 @@ development:
     default:
       uri: <%= ENV['MONGODB_URI'] %>
       options:
-        database: writeonapi
         direct_connection: true
 
 test:
