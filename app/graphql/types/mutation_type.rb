@@ -8,6 +8,7 @@ module Types
     field :add_user, mutation: Mutations::AddUser
     field :toggle_affirmation, mutation: Mutations::ToggleAffirmation
     field :login_user, mutation: Mutations::LoginUser
+    field :update_movie_review, mutation: Mutations::UpdateMovieReview
     field :update_todo, mutation: Mutations::UpdateTodo
   end
 end
