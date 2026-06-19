@@ -6,6 +6,7 @@ describe Day, type: :model do
   it { is_expected.to embed_one(:journal) }
   it { is_expected.to embed_one(:mood) }
   it { is_expected.to embed_many(:todos) }
+  it { is_expected.to embed_many(:movies) }
   it { is_expected.to validate_presence_of(:date) }
   it { is_expected.to validate_uniqueness_of(:date).scoped_to(:user_id) }
 
