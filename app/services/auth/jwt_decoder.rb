@@ -12,6 +12,8 @@ module Auth
       return nil if token.blank?
 
       payload = decode_token
+      return nil unless payload
+
       find_user(payload)
     end
 
@@ -24,7 +26,9 @@ module Auth
     end
 
     def decode_token
-      JWT.decode(token, secret_key, true, { algorithm: 'HS256' }).first
+      JWT.decode(token, secret_key, true, algorithm: 'HS256').first
+    rescue JWT::ExpiredSignature, JWT::DecodeError
+      nil
     end
 
     def secret_key
