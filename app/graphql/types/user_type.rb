@@ -6,13 +6,9 @@ module Types
                                    description: 'Unique identifier for the user'
 
     field :token, String, null: false,
-                          description: 'JWT Token generated'
+                          description: 'JWT Token generated', method: :generate_auth_token
 
     field :email, String, null: false,
                           description: 'User email address'
-  end
-
-  def token
-    object.generate_auth_token
   end
 end
