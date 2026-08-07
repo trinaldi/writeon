@@ -3,7 +3,6 @@ require 'rails_helper'
 describe 'Mood Mutation', type: :request do
   include_context 'with GraphQL Client'
 
-  let!(:user) { create(:user) }
   let!(:day) { create(:day) }
   let(:new_mood) { build(:mood) }
   let(:query) do
@@ -37,7 +36,7 @@ describe 'Mood Mutation', type: :request do
 
   context 'when a new mood is present' do
     before do
-      post_graph(query, { mood: new_mood.mood, dayId: day.id.to_s }, context: { current_user: user })
+      post_graph(query, { mood: new_mood.mood, dayId: day.id.to_s }, context: { current_user: day.user })
     end
 
     it 'has the correct data' do
@@ -49,7 +48,7 @@ describe 'Mood Mutation', type: :request do
 
     context 'when day is not found' do
       before do
-        post_graph(query, { mood: new_mood.mood, dayId: 'invalid_id' }, context: { current_user: user })
+        post_graph(query, { mood: new_mood.mood, dayId: 'invalid_id' }, context: { current_user: day.user })
       end
 
       it 'returns an error' do
