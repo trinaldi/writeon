@@ -5,6 +5,7 @@ module Types
     field :add_mood, mutation: Mutations::AddMood
     field :add_movie, mutation: Mutations::AddMovie
     field :add_todo, mutation: Mutations::AddTodo
+    field :add_journal, mutation: Mutations::AddJournal
     field :add_user, mutation: Mutations::AddUser
     field :toggle_affirmation, mutation: Mutations::ToggleAffirmation
     field :login_user, mutation: Mutations::LoginUser
