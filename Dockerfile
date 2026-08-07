@@ -1,13 +1,7 @@
 FROM ruby:4.0.5-alpine
 
-# Removido nodejs e yarn já que é uma API pura
-RUN apk add --no-cache \
-  build-base \
-  git \
-  tzdata \
-  yaml \
-  yaml-dev \
-  coreutils
+RUN apk add --no-cache --no-progress \
+  build-base git tzdata yaml yaml-dev coreutils
 
 WORKDIR /app
 
