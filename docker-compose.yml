@@ -23,7 +23,7 @@ services:
       - .env
     environment:
       - RAILS_ENV=${RAILS_ENV:-development}
-      - MONGODB_URI=${MONGODB_URI}
+      - MONGODB_URI=mongodb://mongo:27017/writeon_development
 
   test:
     build: .
