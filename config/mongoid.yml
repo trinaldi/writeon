@@ -11,6 +11,9 @@ development:
       uri: <%= ENV['MONGODB_URI'] %>
       options:
         direct_connection: true
+        server_selection_timeout: 5
+        read:
+          mode: :primary
 
 test:
   clients:
