@@ -5,6 +5,9 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '4.0.5'
 
+gem 'actionpack', '~> 8.0.5'
+gem 'activejob', '~> 8.0.5'
+gem 'activemodel', '~> 8.0.5'
 gem 'bcrypt'
 gem 'bootsnap', require: false
 gem 'dotenv-rails', groups: %i[development test]
@@ -15,7 +18,7 @@ gem 'mongoid-slug'
 gem 'puma', '>=6'
 gem 'rack-attack'
 gem 'rack-cors'
-gem 'rails', '8.0.5'
+gem 'railties', '~> 8.0.5'
 gem 'simple_enum', require: 'simple_enum/mongoid'
 gem 'tzinfo-data'
 
