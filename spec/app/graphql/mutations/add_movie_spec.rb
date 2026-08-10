@@ -3,7 +3,6 @@ require 'rails_helper'
 describe 'Add Movie mutation', type: :request do
   include_context 'with GraphQL Client'
 
-  let!(:user) { create(:user) }
   let!(:day) { create(:day) }
   let(:new_movie) { build(:movie) }
   let(:query) do
@@ -30,7 +29,7 @@ describe 'Add Movie mutation', type: :request do
                    title: new_movie.title,
                    year: new_movie.year,
                    rating: new_movie.rating
-                 }, context: { current_user: user })
+                 }, context: { current_user: day.user })
     end
 
     it 'has the correct data' do
@@ -49,7 +48,7 @@ describe 'Add Movie mutation', type: :request do
                    title: new_movie.title,
                    year: new_movie.year,
                    rating: new_movie.rating },
-                 context: { current_user: user })
+                 context: { current_user: day.user })
     end
 
     it 'returns an error' do
@@ -59,7 +58,6 @@ describe 'Add Movie mutation', type: :request do
 
   context 'when user is not authenticated' do
     before do
-      # post_graph sem context: { current_user: } = sem JWT no header
       post_graph(query, {
                    dayId: day.id.to_s,
                    title: new_movie.title,

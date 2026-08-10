@@ -13,7 +13,7 @@ module Mutations
 
     def resolve(day_id:, title:, year:, rating:, plot: nil, review: nil, watched_at: nil) # rubocop:disable Metrics/ParameterLists
       authenticate_user!
-      day = Day.find(day_id)
+      day = current_user.days.find(day_id)
       day.movies.build(title: title, year: year, rating: rating, plot: plot, review: review,
                        watched_at: watched_at)
       day.save

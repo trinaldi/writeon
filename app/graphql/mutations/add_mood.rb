@@ -9,7 +9,7 @@ module Mutations
     def resolve(mood:, day_id:)
       authenticate_user!
 
-      day = Day.find(day_id)
+      day = current_user.days.find(day_id)
       day.build_mood(mood: mood)
       day.save
       { day: day.persisted? ? day : nil, errors: day.errors.full_messages }
