@@ -129,7 +129,7 @@ GEM
     mongoid-slug (7.1.0)
       mongoid (>= 7.0)
       stringex (~> 2.0)
-    msgpack (1.8.4)
+    msgpack (1.8.7)
     mutex_m (0.3.0)
     nio4r (2.7.5)
     nokogiri (1.19.7-aarch64-linux-gnu)
@@ -394,7 +394,7 @@ CHECKSUMS
   mongoid-compatibility (1.0.0) sha256=08e5770d102258a3b8f39443057de42cde61d465980f182954b1b70d965465e8
   mongoid-rspec (4.2.0) sha256=0811fccdc6dcca21987486208a0f614cc395620ccb7ce884b9bce0b5a677ecc8
   mongoid-slug (7.1.0) sha256=cbc65c1aae3a125ac1a16b705ceadffe39bf14567789ff5cbae30cc4ab2fc5cb
-  msgpack (1.8.4) sha256=4411c22d350dd1c20250f7eada3cca2695438c2f769cf0782f0cd065d90a3e7b
+  msgpack (1.8.7) sha256=dfefec761b5f9047e6e8d95d2c7f8af4b3725d984a01942adc533aa819a2df33
   mutex_m (0.3.0) sha256=cfcb04ac16b69c4813777022fdceda24e9f798e48092a2b817eb4c0a782b0751
   nio4r (2.7.5) sha256=6c90168e48fb5f8e768419c93abb94ba2b892a1d0602cb06eef16d8b7df1dca1
   nokogiri (1.19.7-aarch64-linux-gnu) sha256=8f5e15d299602456406e1f03a9f3456cceb33a0722811e818d2ee2214eb4c84a
