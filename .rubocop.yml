@@ -29,3 +29,5 @@ RSpec/MultipleExpectations:
 Metrics/BlockLength:
   Exclude:
     - 'spec/**/*'
+GraphQL/DefaultForOptionalArgument:
+  Enabled: false

@@ -10,7 +10,7 @@ describe Day, type: :model do
   it { is_expected.to validate_presence_of(:date) }
   it { is_expected.to validate_uniqueness_of(:date).scoped_to(:user_id) }
 
-  # rubocop:disable RSpec/ExampleLength
+  # rubocop:disable-next RSpec/ExampleLength
   it 'does not allow duplicate date for the same user' do
     user = create(:user)
     today = Time.zone.today
@@ -21,7 +21,6 @@ describe Day, type: :model do
       create(:day, date: today, user: user)
     end.to raise_error(Mongoid::Errors::Validations, /Date has already been taken/)
   end
-  # rubocop:enable RSpec/ExampleLength
 
   it 'allows same date for different users' do
     today = Time.zone.today

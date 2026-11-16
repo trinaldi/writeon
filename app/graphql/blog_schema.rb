@@ -1,4 +1,4 @@
-# rubocop: disable GraphQL/MaxComplexitySchema
+# rubocop: disable-next GraphQL/MaxComplexitySchema
 class BlogSchema < GraphQL::Schema
   mutation(Types::MutationType)
   query(Types::QueryType)
@@ -8,4 +8,3 @@ class BlogSchema < GraphQL::Schema
   max_depth Rails.env.development? ? nil : 10
   validate_max_errors(100)
 end
-# rubocop: enable GraphQL/MaxComplexitySchema
