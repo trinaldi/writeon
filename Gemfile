@@ -12,6 +12,7 @@ gem 'bcrypt'
 gem 'bootsnap', require: false
 gem 'dotenv-rails', groups: %i[development test]
 gem 'graphql'
+gem 'json', '< 3'
 gem 'jwt'
 gem 'mongoid'
 gem 'mongoid-slug'
