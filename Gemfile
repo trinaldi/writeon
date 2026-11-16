@@ -25,7 +25,6 @@ gem 'tzinfo-data'
 
 group :test do
   gem 'mongoid-rspec'
-  gem 'webmock'
 end
 
 group :development, :test do
