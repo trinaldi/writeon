@@ -1,4 +1,4 @@
-FROM ruby:4.0.5-alpine
+FROM ruby:4.0.10-alpine3.24
 
 RUN apk add --no-cache --no-progress \
   build-base git tzdata yaml yaml-dev coreutils
